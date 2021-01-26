@@ -1,0 +1,92 @@
+# 自动切换暗凉模式
+mode: auto
+
+# 头像
+avatar:
+  enable: true
+  url: /images/avatar.jpg
+  rounded: true
+  opacity: 1
+  mickey_mouse: true
+  status:
+    enable: true
+    emoji: 😭
+    message: 不想变废物
+#  🌑
+
+# 社交图标
+social:
+
+# 标语动画
+banner:
+  enable: true
+  title: 8963核电站
+  src: /js/ui/banner.js
+  border: true
+  cloud:
+    enable: true
+    color: "white"
+  go_down:
+    enable: true
+    icon: icon-arrow-down-s-line
+
+# 背景图片
+bg_image:
+  enable: true
+  url: https://s3.ax1x.com/2021/01/26/sXMres.jpg
+  dark: https://s3.ax1x.com/2021/01/26/sXMcF0.jpg
+  # blur: 30px # 设置背景模糊程度
+  # opacity: 0.1
+
+# 导航
+menu:
+  home:
+    path: /
+    icon: icon-home-4-line
+  list:
+    - type: archives
+      path: /archives/
+      icon: icon-archive-line
+    - type: categories
+      path: /categories/
+      icon: icon-folder-2-line
+    - type: tags
+      path: /tags/
+      icon: icon-price-tag-3-line
+    - path: https://www.yunyoujun.cn
+      icon: icon-cloud-line
+      count: 你猜
+
+# 页面链接
+pages:
+  - name: 我的小伙伴们
+    url: /links/
+    icon: icon-genderless-line
+    color: dodgerblue
+
+# 图片懒加载
+lazyload:
+  enable: true
+
+# 打赏
+reward:
+  enable: false
+
+# 页脚
+footer:
+  since: 2020
+  icon:
+    name: icon-cloud-line
+    animated: true
+    color: "#0078E7"
+  powered:
+    enable: false
+  beian:
+    enable: false
+
+# 一言
+say:
+  enable: true
+  api: /data/sentences.json
+  hitokoto:
+    enable: false
