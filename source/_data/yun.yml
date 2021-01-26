@@ -36,8 +36,8 @@ banner:
 # 背景图片
 bg_image:
   enable: true
-  url: https://s3.ax1x.com/2021/01/26/sXMres.jpg
-  dark: https://s3.ax1x.com/2021/01/26/sXMcF0.jpg
+  url: /images/bright.jpg
+  dark: /images/dark.jpg
   # blur: 30px # 设置背景模糊程度
   # opacity: 0.1
 
