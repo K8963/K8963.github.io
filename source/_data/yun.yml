@@ -16,7 +16,10 @@ avatar:
 
 # 社交图标
 social:
-
+  - name: GitHub
+    link: https://github.com/K8963
+    icon: icon-github-line
+    color: "#181717"
 # 标语动画
 banner:
   enable: true
@@ -39,6 +42,7 @@ bg_image:
   # opacity: 0.1
 
 # 导航
+# icon: icon-clipboard-line
 menu:
   home:
     path: /
@@ -53,16 +57,17 @@ menu:
     - type: tags
       path: /tags/
       icon: icon-price-tag-3-line
-    - path: https://www.yunyoujun.cn
-      icon: icon-cloud-line
-      count: 你猜
+  custom:
+    title: 我
+    path: /about/
+    icon: icon-open-arm-line
 
 # 页面链接
 pages:
-  - name: 我的小伙伴们
-    url: /links/
-    icon: icon-genderless-line
-    color: dodgerblue
+#   - name: 我的小伙伴们
+#     url: /links/
+#     icon: icon-genderless-line
+#     color: dodgerblue
 
 # 图片懒加载
 lazyload:
@@ -78,7 +83,7 @@ footer:
   icon:
     name: icon-cloud-line
     animated: true
-    color: "#0078E7"
+    color: "#dfefef"
   powered:
     enable: false
   beian:
@@ -90,3 +95,27 @@ say:
   api: /data/sentences.json
   hitokoto:
     enable: false
+
+# 鼠标
+cursor:
+  enable: true
+
+# 卡片透明度
+post_card:
+  opacity: 0.8
+
+# 文章信息
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at: false
+  categories: true
+  tags: true
+
+# 目录
+toc:
+  list_number: true
+  max_depth: 6
+  min_depth: 1
+  placeholder: 博主很懒，没有目录
+  collapse: false

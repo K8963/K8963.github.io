@@ -1,0 +1,59 @@
+---
+title: 使用ffmpeg进行视频转码
+date: 2020-09-18 21:52:39
+comments: false 
+tags:
+  - JavaScript
+  - Node.js
+categories:
+  - 前端
+---
+首先电脑中要先安装ffmpeg
+[下载](http://ffmpeg.org/download.html#build-windows)安装
+配置环境
+![](https://s1.ax1x.com/2020/09/18/w4h3P1.jpg)
+检查安装
+![](https://s1.ax1x.com/2020/09/18/w4hoR0.jpg)
+至此,ffmpeg就安装完成了.
+接下来要在node中使用,需要下载[fluent-ffmpeg](https://www.npmjs.com/package/fluent-ffmpeg)
+```language
+npm install fluent-ffmpeg
+```
+转码例子:
+[Node爬取字母站视频](http://k8963.site/#/article?id=12)使用这个例子所下载的视频进行转码,将flv格式的视频转为mp3
+```Javascript
+function transcode(info) {
+  // 文件路径 + flv 原格式
+  var command = ffmpeg('media/' + info.name + '.flv')
+    .on('start', function (commandLine) {
+      console.log('开始' + commandLine);
+    })
+    .on('progress', function (progress) {
+      console.log('进度' + progress.percent + '%')
+    })
+    .on('end', function () {
+      console.log("完成");
+    })
+     //文件路径 + mp3要转码的格式
+    .save('media/' + info.name + '.mp4');
+}
+let videoInfo = {
+  url: 'https://www.bilibili.com/video/BV1rs411p7c8?from=search&seid=16766879598476832298',
+  name: 'feeling you'
+}
+// 调用函数
+transcode(videoInfo);
+```
+执行结果
+![](https://s1.ax1x.com/2020/09/18/w451c6.jpg)
+
+在文件中试听转码后的文件,无问题
+![](https://s1.ax1x.com/2020/09/18/w4IrGR.jpg)
+
+当要转成 mp4 ,修改此处代码
+```JavaScript
+.save('media/' + info.name + '.mp4');
+```
+执行js文件,顺利转码.
+
+当[Node爬取字母站视频](http://k8963.site/#/article?id=12)与此篇博客内容结合我们就可以制作一个字母站视频下载并转码的小程序,并添加一定的ui页面就可以制作一个小插件了.有空再做吧~~~~
