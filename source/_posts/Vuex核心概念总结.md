@@ -8,8 +8,8 @@ tags:
 categories:
   - 前端
 ---
-
-
+核心概念
+<!-- more -->
 ```javascript
 // store.js
 import Vue from 'vue'

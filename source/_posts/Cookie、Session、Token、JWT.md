@@ -8,6 +8,10 @@ categories:
   - 其他
 ---
 
+Cookie、Session、Token、JWT
+
+<!-- more -->
+
 # 什么是Cookie？
 
 cookie 存储在客户端： cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。

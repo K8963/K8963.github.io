@@ -8,6 +8,8 @@ tags:
 categories:
   - 前端
 ---
+使用工具[ibili](https://www.npmjs.com/package/ibili)爬取B站视频
+<!-- more -->
 
 # 下载
 首先，安装好node环境，下载一个工具库 [ibili](https://www.npmjs.com/package/ibili)
@@ -37,7 +39,11 @@ let videoInfo = {
 downloadV(videoInfo);
 ```
 例如我要下载`https://www.bilibili.com/video/BV1rs411p7c8?from=search&seid=16766879598476832298`这个地址的视频，并取名为`feeling you `
+
 执行文件
+
 ![](https://s1.ax1x.com/2020/09/15/wywkWD.jpg)
+
 查看路径下的media文件夹可看到已经下载完成的视频文件
+
 ![](https://s1.ax1x.com/2020/09/15/wywGlQ.jpg)

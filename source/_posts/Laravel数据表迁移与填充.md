@@ -8,15 +8,21 @@ tags:
 categories:
   - 后端
 ---
+Laravel-数据表迁移与填充
+<!-- more -->
 
 创建模型与填充文件：
+
 例如：创建一个文章数据表
+
 ```javascript
 php artisan make:model Article -m
 ```
 
 -m 是 --migration 的缩写，告知 Artisan 在创建模型同时创建与之对应的迁移文件
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200907103743434.png#pic_center)
+
 迁移文件位置   `项目根目录\database\migrations`
 
 ```php
@@ -61,6 +67,7 @@ class CreateArticlesTable extends Migration
 
 ```
 列类型可[查看](https://blog.csdn.net/weixin_36934930/article/details/100693183)
+
 执行迁移文件
 
 ```php
@@ -106,9 +113,12 @@ class Article extends Model
 php artisan make:seeder ArticlesTableSeeder
 ```
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200907105205385.png#pic_center)
+
 填充器位置：`项目根目录下\database\seeds`
+
 使用faker库快速填充数据，[
 可查看](https://www.cnblogs.com/jxl1996/p/10335920.html)
+
 ```php
 <?php
 

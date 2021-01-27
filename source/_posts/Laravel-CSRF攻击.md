@@ -9,9 +9,14 @@ categories:
   - 后端
 ---
 
+什么是CSRF攻击？
+laravel如何避免CSRF攻击？
+<!-- more -->
+
 # CSRF攻击是跨站请求伪造(Cross-site request forgery)的英文缩写，
 
 Laravel框架中避免CSRF攻击很简单，laravel自动为每个用户Session生成一个CSRF Token，该Token可用于验证登录用户和发起者请求是否是同一个人，如果不是则请求失败。
+
 Laravel提供了一个全局帮助函数csrf token来获取Token值，因此只需要在视图提交表单中添加如下HTML代码即可在请求中带上Token：
 
 ```

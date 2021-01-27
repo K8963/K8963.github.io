@@ -8,6 +8,11 @@ tags:
 categories:
   - 前端
 ---
+
+使用ffmpeg进行视频转码
+
+<!-- more -->
+
 首先电脑中要先安装ffmpeg
 [下载](http://ffmpeg.org/download.html#build-windows)安装
 配置环境
