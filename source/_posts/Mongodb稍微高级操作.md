@@ -63,7 +63,7 @@ db.c1.find().sort({age:-1}).limit(2)
 db.c1.find().sort({age:-1}).skip(2).limit(2)
 ```
 
-![](img/22.png)
+[![yiLgUS.png](https://s3.ax1x.com/2021/01/29/yiLgUS.png)](https://imgchr.com/i/yiLgUS)
 
 
 
@@ -186,7 +186,7 @@ db.c1.find()
 >])
 >```
 >
->![](img/23.png)
+>[![yiL24g.png](https://s3.ax1x.com/2021/01/29/yiL24g.png)](https://imgchr.com/i/yiL24g)
 
 - 查询男生、女生人数，按人数升序
 
@@ -254,7 +254,7 @@ db.c1.count()
 >db.c1.createIndex({name:1})
 >```
 >
->![](img/24.png)
+>[![yiLWCQ.png](https://s3.ax1x.com/2021/01/29/yiLWCQ.png)](https://imgchr.com/i/yiLWCQ)
 
 **练习2：删除name索引**
 
@@ -262,7 +262,7 @@ db.c1.count()
 > db.c1.dropIndex('name_1')
 > ```
 >
-> ![](img/25.png)
+> [![yiLf3j.png](https://s3.ax1x.com/2021/01/29/yiLf3j.png)](https://imgchr.com/i/yiLf3j)
 
 **练习3：给name创建索引并起名web**
 
@@ -270,7 +270,7 @@ db.c1.count()
 >db.c1.createIndex({name:1},{name:"web"})
 >```
 >
->![](img/26.png)
+>[![yiLhgs.png](https://s3.ax1x.com/2021/01/29/yiLhgs.png)](https://imgchr.com/i/yiLhgs)
 
 
 
@@ -281,7 +281,7 @@ db.c1.count()
 >db.c1.createIndex({name:1,age:1})
 >```
 >
->![](img/27.png)
+>[![yiL4vn.png](https://s3.ax1x.com/2021/01/29/yiL4vn.png)](https://imgchr.com/i/yiL4vn)
 
 **练习5：**创建唯一索引，给name添加普通索引
 
@@ -303,7 +303,7 @@ db.c1.count()
 >db.c1.insert({name:"a"})
 >```
 >
->![](img/28.png)
+>[![yiLIuq.png](https://s3.ax1x.com/2021/01/29/yiLIuq.png)](https://imgchr.com/i/yiLIuq)
 
 
 
@@ -325,7 +325,7 @@ db.集合名.find().explain('executionStats')
 > db.c1.find({age:18}).explain('executionStats')
 > ```
 >
-> ![](img/29.png)
+> [![yiLoD0.png](https://s3.ax1x.com/2021/01/29/yiLoD0.png)](https://imgchr.com/i/yiLoD0)
 >
 > 2.age添加索引
 >
@@ -334,7 +334,7 @@ db.集合名.find().explain('executionStats')
 > db.c1.find({age:18}).explain('executionStats')
 > ```
 >
-> ![](img/30.png)
+> [![yiLTbV.png](https://s3.ax1x.com/2021/01/29/yiLTbV.png)](https://imgchr.com/i/yiLTbV)
 
 
 
@@ -391,11 +391,11 @@ db.createUser({
    })
    ```
 
-   ![](img/31.png)
+   [![yiLHET.png](https://s3.ax1x.com/2021/01/29/yiLHET.png)](https://imgchr.com/i/yiLHET)
 
    数据中查看超级管理员
 
-   ![](img/32.png)
+   [![yiLbUU.png](https://s3.ax1x.com/2021/01/29/yiLbUU.png)](https://imgchr.com/i/yiLbUU)
 
 2. 退出卸载服务
 
