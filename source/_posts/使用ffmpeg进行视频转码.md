@@ -6,7 +6,7 @@ tags:
   - JavaScript
   - Node.js
 categories:
-  - 前端
+  - 后端
 ---
 
 使用ffmpeg进行视频转码

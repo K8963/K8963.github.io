@@ -7,7 +7,6 @@ tags:
 categories:
   - 数据库
 ---
-
 # MongoDB 排序&分页
 
 ## 准备
@@ -63,7 +62,8 @@ db.c1.find().sort({age:-1}).limit(2)
 db.c1.find().sort({age:-1}).skip(2).limit(2)
 ```
 
-[![yiLgUS.png](https://s3.ax1x.com/2021/01/29/yiLgUS.png)](https://imgchr.com/i/yiLgUS)
+
+![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/22.png)
 
 
 
@@ -186,7 +186,7 @@ db.c1.find()
 >])
 >```
 >
->[![yiL24g.png](https://s3.ax1x.com/2021/01/29/yiL24g.png)](https://imgchr.com/i/yiL24g)
+>![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/23.png)
 
 - 查询男生、女生人数，按人数升序
 
@@ -254,7 +254,7 @@ db.c1.count()
 >db.c1.createIndex({name:1})
 >```
 >
->[![yiLWCQ.png](https://s3.ax1x.com/2021/01/29/yiLWCQ.png)](https://imgchr.com/i/yiLWCQ)
+>![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/24.png)
 
 **练习2：删除name索引**
 
@@ -262,7 +262,7 @@ db.c1.count()
 > db.c1.dropIndex('name_1')
 > ```
 >
-> [![yiLf3j.png](https://s3.ax1x.com/2021/01/29/yiLf3j.png)](https://imgchr.com/i/yiLf3j)
+> ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/25.png)
 
 **练习3：给name创建索引并起名web**
 
@@ -270,7 +270,7 @@ db.c1.count()
 >db.c1.createIndex({name:1},{name:"web"})
 >```
 >
->[![yiLhgs.png](https://s3.ax1x.com/2021/01/29/yiLhgs.png)](https://imgchr.com/i/yiLhgs)
+>![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/26.png)
 
 
 
@@ -281,7 +281,7 @@ db.c1.count()
 >db.c1.createIndex({name:1,age:1})
 >```
 >
->[![yiL4vn.png](https://s3.ax1x.com/2021/01/29/yiL4vn.png)](https://imgchr.com/i/yiL4vn)
+>![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/27.png)
 
 **练习5：**创建唯一索引，给name添加普通索引
 
@@ -303,7 +303,7 @@ db.c1.count()
 >db.c1.insert({name:"a"})
 >```
 >
->[![yiLIuq.png](https://s3.ax1x.com/2021/01/29/yiLIuq.png)](https://imgchr.com/i/yiLIuq)
+>![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/28.png)
 
 
 
@@ -325,7 +325,7 @@ db.集合名.find().explain('executionStats')
 > db.c1.find({age:18}).explain('executionStats')
 > ```
 >
-> [![yiLoD0.png](https://s3.ax1x.com/2021/01/29/yiLoD0.png)](https://imgchr.com/i/yiLoD0)
+> ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/29.png)
 >
 > 2.age添加索引
 >
@@ -334,7 +334,7 @@ db.集合名.find().explain('executionStats')
 > db.c1.find({age:18}).explain('executionStats')
 > ```
 >
-> [![yiLTbV.png](https://s3.ax1x.com/2021/01/29/yiLTbV.png)](https://imgchr.com/i/yiLTbV)
+> ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/30.png)
 
 
 
@@ -391,11 +391,11 @@ db.createUser({
    })
    ```
 
-   [![yiLHET.png](https://s3.ax1x.com/2021/01/29/yiLHET.png)](https://imgchr.com/i/yiLHET)
+   ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/31.png)
 
    数据中查看超级管理员
 
-   [![yiLbUU.png](https://s3.ax1x.com/2021/01/29/yiLbUU.png)](https://imgchr.com/i/yiLbUU)
+   ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/32.png)
 
 2. 退出卸载服务
 
@@ -404,7 +404,7 @@ db.createUser({
    bin\mongod --remove
    ```
 
-   
+   ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/33.png)
 
 3. 安装需要身份验证的MongoDB服务
 
@@ -433,11 +433,11 @@ db.createUser({
 mongo 127.0.0.1:27017/admin -u 8963 -p 8963root
 ```
 
-![](img/34.png)
+![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/34.png)
 
 方法2: a-先登录，b-选择数据库，c-输入db.auth(用户名,密码)
 
-![](img/35.png)
+![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/35.png)
 
 
 
