@@ -6,7 +6,7 @@ tags:
   - JavaScript
   - Node.js
 categories:
-  - 前端
+  - 后端
 ---
 
 使用ffmpeg进行视频转码
@@ -25,7 +25,7 @@ categories:
 npm install fluent-ffmpeg
 ```
 转码例子:
-[Node爬取字母站视频](http://k8963.site/#/article?id=12)使用这个例子所下载的视频进行转码,将flv格式的视频转为mp3
+[Node爬取字母站视频](https://k8963.github.io/2020/09/13/Node%E7%88%AC%E5%8F%96%E5%AD%97%E6%AF%8D%E7%AB%99%E8%A7%86%E9%A2%91/)使用这个例子所下载的视频进行转码,将flv格式的视频转为mp3
 ```Javascript
 function transcode(info) {
   // 文件路径 + flv 原格式

@@ -6,8 +6,4 @@ fi
 git add -A
 git commit -m "$info"
 git push origin hexo
-# 更新博客
-hexo clean
-hexo g
-hexo d
-# 此后更新的话，只需要在终端执行 sh update.sh 即可。
+# 此后更新的话，只需要在终端执行 sh update-hexo.sh 即可。

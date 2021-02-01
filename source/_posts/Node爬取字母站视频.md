@@ -6,7 +6,7 @@ tags:
   - JavaScript
   - Node.js
 categories:
-  - 前端
+  - 后端
 ---
 使用工具[ibili](https://www.npmjs.com/package/ibili)爬取B站视频
 <!-- more -->
