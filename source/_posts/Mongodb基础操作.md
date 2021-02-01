@@ -93,7 +93,7 @@ use 数据库名称
 
 效果：
 
-![](img/6.png)
+[![yFSfot.png](https://s3.ax1x.com/2021/01/29/yFSfot.png)](https://imgchr.com/i/yFSfot)
 
 注意：
 

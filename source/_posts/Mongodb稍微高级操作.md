@@ -433,11 +433,11 @@ db.createUser({
 mongo 127.0.0.1:27017/admin -u 8963 -p 8963root
 ```
 
-![](img/34.png)
+[![yFSHyQ.png](https://s3.ax1x.com/2021/01/29/yFSHyQ.png)](https://imgchr.com/i/yFSHyQ)
 
 方法2: a-先登录，b-选择数据库，c-输入db.auth(用户名,密码)
 
-![](img/35.png)
+[![yFSOwn.png](https://s3.ax1x.com/2021/01/29/yFSOwn.png)](https://imgchr.com/i/yFSOwn)
 
 
 
