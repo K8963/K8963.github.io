@@ -439,7 +439,50 @@ mongo 127.0.0.1:27017/admin -u 8963 -p 8963root
 
 ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/35.png)
 
+## 创建其他角色
 
+### 准备
+
+添加用户shop1可以读取shop数据库
+
+添加用户shop2可以读写shop数据库
+
+注意：在对应的数据库内创建角色
+
+测试数据
+
+```
+use shop;
+for(var i = 1;i <= 10;i++){
+	db.goods.insert({"name":"goodName"+i,"price":i});
+}
+```
+
+### 添加用户并设置权限
+
+```
+// shop1
+use shop
+db.createUser({
+	"user":"shop1",
+	"pwd":"admin888",
+	"roles":[{
+		role:"read",
+		db:"shop"
+	}]
+})
+// shop2
+db.createUser({
+	"user":"shop2",
+	"pwd":"admin888",
+	"roles":[{
+		role:"readWrite",
+		db:"shop"
+	}]
+})
+```
+
+![](E:/8963/programStudy/Mongodb/note/img/36.png)
 
 # Mongodb 备份还原
 
