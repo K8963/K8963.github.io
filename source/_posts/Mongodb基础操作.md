@@ -7,8 +7,8 @@ tags:
 categories:
   - 数据库
 ---
-
-
+Mongodb基础操作(curd)
+<!-- more -->
 # Mongodb 安装
 
 1. [下载](https://www.mongodb.com/try/download/community)
