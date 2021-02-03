@@ -95,7 +95,11 @@ use 数据库名称
 
 效果：
 
+<<<<<<< HEAD
+[![yFSfot.png](https://s3.ax1x.com/2021/01/29/yFSfot.png)](https://imgchr.com/i/yFSfot)
+=======
 ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/6.png)
+>>>>>>> 3513dad7e07084171d030e57d8ab31dc9516318d
 
 注意：
 

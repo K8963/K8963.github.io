@@ -435,6 +435,12 @@ db.createUser({
 mongo 127.0.0.1:27017/admin -u 8963 -p 8963root
 ```
 
+[![yFSHyQ.png](https://s3.ax1x.com/2021/01/29/yFSHyQ.png)](https://imgchr.com/i/yFSHyQ)
+
+方法2: a-先登录，b-选择数据库，c-输入db.auth(用户名,密码)
+
+[![yFSOwn.png](https://s3.ax1x.com/2021/01/29/yFSOwn.png)](https://imgchr.com/i/yFSOwn)
+
 ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/34.png)
 
 方法2: a-先登录，b-选择数据库，c-输入db.auth(用户名,密码)
@@ -484,7 +490,7 @@ db.createUser({
 })
 ```
 
-![](E:/8963/programStudy/Mongodb/note/img/36.png)
+![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/36.png)
 
 # Mongodb 备份还原
 
