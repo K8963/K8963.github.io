@@ -26,7 +26,7 @@ npm install fluent-ffmpeg
 ```
 转码例子:
 [Node爬取字母站视频](https://k8963.github.io/2020/09/13/Node%E7%88%AC%E5%8F%96%E5%AD%97%E6%AF%8D%E7%AB%99%E8%A7%86%E9%A2%91/)使用这个例子所下载的视频进行转码,将flv格式的视频转为mp3
-```Javascript
+```javascript
 function transcode(info) {
   // 文件路径 + flv 原格式
   var command = ffmpeg('media/' + info.name + '.flv')
@@ -56,7 +56,7 @@ transcode(videoInfo);
 ![](https://s1.ax1x.com/2020/09/18/w4IrGR.jpg)
 
 当要转成 mp4 ,修改此处代码
-```JavaScript
+```javascript
 .save('media/' + info.name + '.mp4');
 ```
 执行js文件,顺利转码.

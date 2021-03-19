@@ -17,7 +17,7 @@ categories:
 npm install ibili
 ```
 可以点击[ibili](https://www.npmjs.com/package/ibili)主页查看其他功能，这里我们试一试下载视频功能。
-```Javascript
+```javascript
 // 引入模块
 const ibili = require('ibili')
 //定义函数

@@ -68,7 +68,7 @@ import {mapState} from 'vuex'
 </template>
 ```
 
-```JavaScript
+```javascript
 //某组件中
 <template>
   <div>
@@ -93,7 +93,7 @@ import {mapState} from 'vuex'
 
 使用：
 
-```JavaScript
+```javascript
 // 第一种方式：直接调用
 this.$store.getters.名称
 // 第二种方式：计算属性
@@ -110,7 +110,7 @@ import { mapGetters } from "vuex";
 
 在 Store.js 中定义 mutations
 
-```JavaScript
+```javascript
 // 组件中触发Mutation
   methods: {
     函数名() {
@@ -144,7 +144,7 @@ import { mapActions } from "vuex";
 
 个人理解：模块化管理vuex数据、操作，大仓库中分小仓库。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块。
 
-```JavaScript
+```javascript
 // 模块内部的数据,参数说明
 const moduleA = {
   state:() => ({

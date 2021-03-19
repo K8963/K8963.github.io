@@ -12,7 +12,7 @@ categories:
 
 问题：
 1.bug
-```JavaScript
+```javascript
   if (!window.localStorage) {
     alert("浏览器不支持localstorage");
     return false;
@@ -22,7 +22,7 @@ categories:
 ```
 
 解决办法：
-```JavaScript
+```javascript
   (function () {
     if (!window.localStorage) {
       alert("浏览器不支持localstorage");

@@ -107,7 +107,7 @@ Restful API是目前比较流行的软件架构，提供了接口设计的原则
 
 基于node开发的框架(原理基于node内置http模块封装)
 
-```JavaScript
+```javascript
 // 1.引入express
 const express = require('express')
 
@@ -136,7 +136,7 @@ npm i body-parser
 
 **入口文件  `index.html`**
 
-```JavaScript
+```javascript
 const express = require('express')
 let app = express()
 
@@ -157,7 +157,7 @@ app.listen('3000', () => {
 
 **控制器 controller 下的 `stu.js`**
 
-```JavaScript
+```javascript
 // 导入模型
 const {
   // createModel, listModel, delModel, upModel
@@ -205,7 +205,7 @@ module.exports = {
 
    添加路由方法
 
-   ```JavaScript
+   ```javascript
    // #添加学生
    app.post('/stu', stuController.create)
    ```
@@ -214,7 +214,7 @@ module.exports = {
 
 2. 控制器
 
-   ```JavaScript
+   ```javascript
    const create = async (req, res) => {
      // 1.接收 post 数据
      let postData = req.body;
@@ -241,7 +241,7 @@ module.exports = {
 
 3. 模型
 
-   ```JavaScript
+   ```javascript
    const createModel = (postData) => {
      const insertObj = new model(postData)
      return insertObj.save()
@@ -266,7 +266,7 @@ module.exports = {
 
    添加路由方法
 
-   ```JavaScript
+   ```javascript
    // #学生列表
    app.get('/stu', stuController.list)
    ```
@@ -275,7 +275,7 @@ module.exports = {
 
 2. 控制器
 
-   ```JavaScript
+   ```javascript
    const list = async (req, res) => {
      let getData = req.query
    
@@ -299,7 +299,7 @@ module.exports = {
 
 3. 模型
 
-   ```JavaScript
+   ```javascript
    const listModel = (skipNum, limitNum) => {
      return model.find().skip(skipNum).limit(limitNum)
        .then(res => {
@@ -323,7 +323,7 @@ module.exports = {
 
    添加路由方法
 
-   ```JavaScript
+   ```javascript
    // #删除学生
    app.delete('/stu', stuController.del)
    ```
@@ -332,7 +332,7 @@ module.exports = {
 
 2. 控制器
 
-   ```JavaScript
+   ```javascript
    const del = async (req, res) => {
      let getData = req.body;
      // console.log(getData);
@@ -355,7 +355,7 @@ module.exports = {
 
 3. 模型
 
-   ```JavaScript
+   ```javascript
    const delModel = (name) => {
      return model.deleteMany(name, function (err) {
        if (err) {
@@ -376,7 +376,7 @@ module.exports = {
 
    添加路由方法
 
-   ```JavaScript
+   ```javascript
    // #修改学生
    app.put('/stu', stuController.updata)
    ```
@@ -385,7 +385,7 @@ module.exports = {
 
 2. 控制器
 
-   ```JavaScript
+   ```javascript
    const updata = async (req, res) => {
      let getData = req.body
      let newD = getData.new
@@ -410,7 +410,7 @@ module.exports = {
 
 3. 模型
 
-   ```JavaScript
+   ```javascript
    const upModel = (sidc, xinc) => {
      let sid = parseInt(sidc)
      let xin = JSON.parse(xinc)
