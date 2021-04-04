@@ -97,6 +97,7 @@ use 数据库名称
 
 ![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/6.png)
 
+
 注意：
 
 在Mongodb中选择不存在的数据库并不会报错，而是隐式创建了一个数据库。
