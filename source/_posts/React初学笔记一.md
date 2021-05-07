@@ -66,7 +66,7 @@ function Dome() {
 
 ## 类组件
 
-```JavaScript
+```javascript
 class Dome extends React.Component{
   // render 存储在类的原型对象上，供实例使用
   // render 中的this是，Dome的实例对象
