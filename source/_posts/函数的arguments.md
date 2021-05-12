@@ -36,7 +36,7 @@ person('小明','男',20);
 
 参数也可以被设置：
 
-![](E:\Hexo\K8963.github.io\source\_posts\img\arguments1.png)
+![](https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/JavaScript/arguments1.png)
 
 arguments 的属性：
 

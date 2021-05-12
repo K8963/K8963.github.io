@@ -8,11 +8,9 @@ categories:
   - 前端
 ---
 
-vue生命周期＼v-if 和 v-show 的区别＼computed和watch的区别＼v-for中 key的作用＼组件传值
+vue生命周期、v-if 和 v-show 的区别、computed和watch的区别、v-for中key的作用、组件传值
 
 <!-- more -->
-
-
 
 # 生命周期
 
@@ -122,6 +120,6 @@ vue.js是采用数据劫持结合发布者-订阅者模式的方式,通过Object
 ## 兄弟组件
 1. 中央通信 
     > A. methods :{ 函数{bus.$emit(‘自定义事件名’，数据)} 发送
-
+    
     > B. created （）{bus.$on(‘A发送过来的自定义事件名’，函数)} 进行数据接收
 2. 通过vuex
