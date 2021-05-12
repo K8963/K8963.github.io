@@ -8,13 +8,7 @@ categories:
   - 前端
 ---
 
-
-
-- vue生命周期
-- v-if 和 v-show 的区别
-- computed和watch的区别
-- v-for中 key的作用
-- 组件传值
+vue生命周期\v-if 和 v-show 的区别\computed和watch的区别\v-for中 key的作用\组件传值
 
 <!-- more -->
 
