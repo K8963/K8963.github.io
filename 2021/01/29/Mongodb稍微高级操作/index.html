@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="8963"><meta name="copyright" content="8963"><meta name="generator" content="Hexo 5.3.0"><meta name="theme" content="hexo-theme-yun"><title>Mongodb稍微高级操作 | 8963核电站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.24/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_j5gk85dg4pf.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"k8963.github.io","root":"/","title":"8963核电站","version":"1.6.1","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"/data/sentences.json"},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="Mongodb稍微高级操作-排序分页、聚合查询、角色权限">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mongodb稍微高级操作">
+<meta property="og:url" content="https://k8963.github.io/2021/01/29/Mongodb%E7%A8%8D%E5%BE%AE%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="8963核电站">
+<meta property="og:description" content="Mongodb稍微高级操作-排序分页、聚合查询、角色权限">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/22.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/23.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/24.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/25.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/26.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/27.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/28.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/29.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/30.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/31.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/32.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/33.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yFSHyQ.png">
+<meta property="og:image" content="https://s3.ax1x.com/2021/01/29/yFSOwn.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/34.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/35.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/36.png">
+<meta property="article:published_time" content="2021-01-29T09:46:25.000Z">
+<meta property="article:modified_time" content="2021-06-14T14:08:44.898Z">
+<meta property="article:author" content="8963">
+<meta property="article:tag" content="Mongodb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/22.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="8963"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="8963"><span class="site-author-status" title="不想变废物">😭</span></a><div class="site-author-name"><a href="/about/">8963</a></div><a class="site-name" href="/about/site.html">8963核电站</a><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">37</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">6</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">17</span></a></div><a class="site-state-item hty-icon-button" href="/about/" title="我"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-open-arm-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/K8963" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB-%E6%8E%92%E5%BA%8F-amp-%E5%88%86%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">MongoDB 排序&amp;分页</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">1.2.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Limit%E4%B8%8ESkip%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">Limit与Skip方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">小总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">聚合查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87-1"><span class="toc-number">2.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">2.2.</span> <span class="toc-text">练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">3.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-1"><span class="toc-number">3.1.</span> <span class="toc-text">练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%B4%A2%E5%BC%95"><span class="toc-number">3.2.</span> <span class="toc-text">分析索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E8%A7%84%E5%88%99"><span class="toc-number">3.3.</span> <span class="toc-text">选择规则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mongodb-%E6%9D%83%E9%99%90%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">Mongodb 权限机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%92%E8%89%B2"><span class="toc-number">4.2.</span> <span class="toc-text">角色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.3.</span> <span class="toc-text">开启验证模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98%E8%B4%A6%E5%8F%B7%E7%99%BB%E5%BD%95"><span class="toc-number">4.4.</span> <span class="toc-text">通过超级管理员账号登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%85%B6%E4%BB%96%E8%A7%92%E8%89%B2"><span class="toc-number">4.5.</span> <span class="toc-text">创建其他角色</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87-2"><span class="toc-number">4.5.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%B9%B6%E8%AE%BE%E7%BD%AE%E6%9D%83%E9%99%90"><span class="toc-number">4.5.2.</span> <span class="toc-text">添加用户并设置权限</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Mongodb-%E5%A4%87%E4%BB%BD%E8%BF%98%E5%8E%9F"><span class="toc-number">5.</span> <span class="toc-text">Mongodb 备份还原</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%BA%93mongodump"><span class="toc-number">5.1.</span> <span class="toc-text">备份数据库mongodump</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%98%E5%8E%9F%E6%95%B0%E6%8D%AE%E5%BA%93mongorestore"><span class="toc-number">5.2.</span> <span class="toc-text">还原数据库mongorestore</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://k8963.github.io/2021/01/29/Mongodb%E7%A8%8D%E5%BE%AE%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="8963"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="8963核电站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Mongodb稍微高级操作</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <span class="post-meta-icon-text">发表于</span> <time title="创建时间：2021-01-29 17:46:25" itemprop="dateCreated datePublished" datetime="2021-01-29T17:46:25+08:00">2021-01-29</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">数据库</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Mongodb/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Mongodb</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p>Mongodb稍微高级操作-排序分页、聚合查询、角色权限</p>
+<a id="more"></a>
+<h1 id="MongoDB-排序-amp-分页"><a href="#MongoDB-排序-amp-分页" class="headerlink" title="MongoDB 排序&amp;分页"></a>MongoDB 排序&amp;分页</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>准备数据库和数据</p>
+<pre class="line-numbers language-none"><code class="language-none">use test3
+db.c1.insert(&#123;_id1:1,name:&quot;a&quot;,sex:1,age:1&#125;)
+db.c1.insert(&#123;_id1:2,name:&quot;a&quot;,sex:1,age:2&#125;)
+db.c1.insert(&#123;_id1:3,name:&quot;b&quot;,sex:2,age:3&#125;)
+db.c1.insert(&#123;_id1:4,name:&quot;c&quot;,sex:2,age:4&#125;)
+db.c1.insert(&#123;_id1:5,name:&quot;d&quot;,sex:2,age:5&#125;)
+
+db.c1.find()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p><strong>语法</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">db.集合名.find().sort(&#123;键：值&#125;)
+					键：要排序的列&#x2F;字段
+					值：1升序，-1降序<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>练习：</strong>根据年龄的升序、降序</p>
+<pre class="line-numbers language-none"><code class="language-none">db.c1.find().sort(&#123;age:1&#125;)
+db.c1.find().sort(&#123;age:-1&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+<h2 id="Limit与Skip方法"><a href="#Limit与Skip方法" class="headerlink" title="Limit与Skip方法"></a>Limit与Skip方法</h2><p><strong>语法：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">db.集合名.find().sort(&#123;键：值&#125;).skip(数字).limit(数字)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>skip跳过指定数量（可选），limit限制查询的数量</p>
+</blockquote>
+<p><strong>练习：</strong>1-降序查询2条，2-降序跳过2条并查询2条</p>
+<pre class="line-numbers language-none"><code class="language-none">db.c1.find().sort(&#123;age:-1&#125;).limit(2)
+db.c1.find().sort(&#123;age:-1&#125;).skip(2).limit(2)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/22.png" loading="lazy"></p>
+<p><strong>实战分页</strong></p>
+<p>需求：数据库1-10数据，每页显示两条（5页）</p>
+<p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">db.c1.find(2).skip((当前页-1)*每页显示条数).limit(2)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<h2 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h2><p>排序、分页</p>
+<pre class="line-numbers language-none"><code class="language-none">db.集合名.find()
+.sort(&#123;键：值&#125;)
+.skip(跳过数)
+.limit(显示数)
+.count(总数量);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h1 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h1><p>统计数据、分组统计</p>
+<p>聚合查询把数据聚起来，然后统计</p>
+<p><strong>语法：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">db.集合名.aggregate([
+	&#123;管道:&#123;表达式&#125;&#125;
+	...
+])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>常用管道</p>
+<pre class="line-numbers language-none"><code class="language-none">$group	将集合中的文档分组用于统计集合
+$match	过滤数据，只要输出符合条件的文档
+$sort		聚合数据进一步排序
+$skip		跳过指定文档数
+$limit	限制返回文档数
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>常用表达式</p>
+<pre class="line-numbers language-none"><code class="language-none">$sum	总和
+$avg	平均
+$min	最小值
+$max	最大值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="准备-1"><a href="#准备-1" class="headerlink" title="准备"></a>准备</h2><pre class="line-numbers language-none"><code class="language-none">use test4
+db.c1.insert(&#123;_id:1,name:&quot;a&quot;,sex:&quot;1&quot;,age:1&#125;)
+db.c1.insert(&#123;_id:2,name:&quot;b&quot;,sex:&quot;1&quot;,age:2&#125;)
+db.c1.insert(&#123;_id:3,name:&quot;c&quot;,sex:&quot;2&quot;,age:3&#125;)
+db.c1.insert(&#123;_id:4,name:&quot;d&quot;,sex:&quot;2&quot;,age:4&#125;)
+db.c1.insert(&#123;_id:5,name:&quot;e&quot;,sex:&quot;2&quot;,age:5&#125;)
+db.c1.find()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ul>
+<li>统计男生、女生总年龄</li>
+</ul>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.aggregate([
+&#123;$group:&#123;
+	_id:&quot;$sex&quot;,
+	rs:&#123;$sum:&quot;$age&quot;&#125;
+&#125;&#125;
+&gt;])
+&gt;&#x2F;&#x2F;	_id:根据哪个字段分组,列、字段需要使用 $ 符
+&gt;&#x2F;&#x2F;	rs:结果如何显示<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+</blockquote>
+<ul>
+<li>统计男生、女生总人数</li>
+</ul>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.aggregate([
+&#123;$group:&#123;
+	_id:&quot;$sex&quot;,
+	rs:&#123;$sum:1&#125;
+&#125;&#125;
+&gt;])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+</blockquote>
+<ul>
+<li>求学生总数和平均年龄</li>
+</ul>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.aggregate([
+&#123;$group:&#123;
+		_id:null,
+		rs1:&#123;$sum:1&#125;,
+		rs2:&#123;$avg:&quot;$age&quot;&#125;
+	&#125;&#125;
+&gt;])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/23.png" loading="lazy"></p>
+</blockquote>
+<ul>
+<li>查询男生、女生人数，按人数升序</li>
+</ul>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.aggregate([
+&#123;$group:&#123;
+	_id:&quot;$sex&quot;,
+	rs:&#123;$sum:1&#125;
+&#125;&#125;,
+&#123;$sort:&#123;rs:1&#125;&#125;
+&gt;])<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+</blockquote>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引：一种排序好的便于快速查询的数据结构</p>
+<p><strong>语法</strong></p>
+<ul>
+<li><p>创建索引</p>
+<pre class="line-numbers language-none"><code class="language-none">db.集合名.createIndex(待创建索引的列[,额外选项])<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>参数</p>
+<blockquote>
+<p>待创建索引的列：{键：1…，键：-1}</p>
+<p>说明：1升序，-1降序，例如{age}表示创建age索引并按照升序的方式存储</p>
+<p>额外选项：设置索引的名称或者唯一的索引等等</p>
+</blockquote>
+</li>
+<li><p>删除索引</p>
+<blockquote>
+<p>全部删除：db.集合名.dropIndexes()</p>
+<p>删除指定：db.集合名.dropIndex(索引名)</p>
+</blockquote>
+</li>
+<li><p>查看索引</p>
+<blockquote>
+<p>db.集合名.getIndexes()</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h2><p><strong>准备：</strong>向数据库新增十万条数据</p>
+<pre class="line-numbers language-none"><code class="language-none">use test5
+for(var i&#x3D;0;i&lt;100000;i++)&#123;
+	db.c1.insert(&#123;name:&quot;aaa&quot;+i,age:i&#125;)
+&#125;
+db.c1.count()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>练习1：给name添加普通索引</strong></p>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.createIndex(&#123;name:1&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/24.png" loading="lazy"></p>
+</blockquote>
+<p><strong>练习2：删除name索引</strong></p>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">db.c1.dropIndex(&#39;name_1&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/25.png" loading="lazy"></p>
+</blockquote>
+<p><strong>练习3：给name创建索引并起名web</strong></p>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.createIndex(&#123;name:1&#125;,&#123;name:&quot;web&quot;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/26.png" loading="lazy"></p>
+</blockquote>
+<p><strong>练习4：</strong>创建复合/组合索引，给name和age添加组合索引</p>
+<blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.集合名.createIndex(&#123;键1：存储方式，键：存储方式&#125;)
+&gt;db.c1.createIndex(&#123;name:1,age:1&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/27.png" loading="lazy"></p>
+</blockquote>
+<p><strong>练习5：</strong>创建唯一索引，给name添加普通索引</p>
+<blockquote>
+<p>删除全部索引</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.dropIndexes()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>设置唯一索引</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.createIndex(&#123;name:1&#125;,&#123;unique:&quot;name&quot;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>测试唯一索引的特性</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt;db.c1.insert(&#123;name:&quot;a&quot;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/28.png" loading="lazy"></p>
+</blockquote>
+<h2 id="分析索引"><a href="#分析索引" class="headerlink" title="分析索引"></a>分析索引</h2><p>语法：</p>
+<pre class="line-numbers language-none"><code class="language-none">db.集合名.find().explain(&#39;executionStats&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>分析查询情况</p>
+<p>案例</p>
+<blockquote>
+<p>1.age未添加索引</p>
+<pre class="line-numbers language-none"><code class="language-none">db.c1.find(&#123;age:18&#125;).explain(&#39;executionStats&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/29.png" loading="lazy"></p>
+<p>2.age添加索引</p>
+<pre class="line-numbers language-none"><code class="language-none">db.c1.createIndex(&#123;age:1&#125;)
+db.c1.find(&#123;age:18&#125;).explain(&#39;executionStats&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/30.png" loading="lazy"></p>
+</blockquote>
+<h2 id="选择规则"><a href="#选择规则" class="headerlink" title="选择规则"></a>选择规则</h2><ul>
+<li>为常作条件、排序、分组的字段建立索引</li>
+<li>选择唯一性索引</li>
+<li>选择较小的数据列</li>
+<li>为较长的字符串使用前缀索引</li>
+</ul>
+<h1 id="Mongodb-权限机制"><a href="#Mongodb-权限机制" class="headerlink" title="Mongodb 权限机制"></a>Mongodb 权限机制</h1><p>使用权限机制开启验证模式</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><pre class="line-numbers language-none"><code class="language-none">db.createUser(&#123;
+	&quot;user&quot;:&quot;账号&quot;,
+	&quot;pwd&quot;:&quot;密码&quot;,
+	&quot;roles&quot;:[&#123;
+		role:&quot;角色&quot;,
+		db:&quot;所属数据库&quot;
+	&#125;]
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><pre class="line-numbers language-none"><code class="language-none">#角色种类
+超级用户角色:root
+数据库用户角色:read、readwrite;数据库管理角色: dbAdmin.userAdmin;
+集群管理角色: clusterAdmin、clusterManager、clusterMonitor、hostManager;备份恢复角色:backup、restore;
+所有数据库角色: readAnyDatabase、readwriteAnyDatabase、userAdminAnyDatabase,dbAdminAnyDatabase
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="开启验证模式"><a href="#开启验证模式" class="headerlink" title="开启验证模式"></a>开启验证模式</h2><ol>
+<li><p>添加超级管理员</p>
+<pre class="line-numbers language-none"><code class="language-none">use admin
+db.createUser(&#123;
+	&quot;user&quot;:&quot;8963&quot;,
+	&quot;pwd&quot;:&quot;8963root&quot;,
+	&quot;roles&quot;:[&#123;
+		role:&quot;root&quot;,
+		db:&quot;admin&quot;
+	&#125;]
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/31.png" loading="lazy"></p>
+<p>数据中查看超级管理员</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/32.png" loading="lazy"></p>
+</li>
+<li><p>退出卸载服务</p>
+<pre class="line-numbers language-none"><code class="language-none">管理员命令
+bin\mongod --remove<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/33.png" loading="lazy"></p>
+</li>
+<li><p>安装需要身份验证的MongoDB服务</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 安装服务 --auth
+mongod --install --dbpath F:\data\mongodb\data --logpath F:\data\mongodb\logs\mongodb2.log --auth
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>启动服务，登录测试</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 启动服务
+net start MongoDB<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+</li>
+</ol>
+<h2 id="通过超级管理员账号登录"><a href="#通过超级管理员账号登录" class="headerlink" title="通过超级管理员账号登录"></a>通过超级管理员账号登录</h2><p>方法1: mongo 服务器IP地址:端口/数据库 -u 用户名 -p 密码</p>
+<pre class="line-numbers language-none"><code class="language-none">mongo 127.0.0.1:27017&#x2F;admin -u 8963 -p 8963root<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yFSHyQ"><img src="https://s3.ax1x.com/2021/01/29/yFSHyQ.png" alt="yFSHyQ.png" loading="lazy"></a></p>
+<p>方法2: a-先登录，b-选择数据库，c-输入db.auth(用户名,密码)</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/yFSOwn"><img src="https://s3.ax1x.com/2021/01/29/yFSOwn.png" alt="yFSOwn.png" loading="lazy"></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/34.png" loading="lazy"></p>
+<p>方法2: a-先登录，b-选择数据库，c-输入db.auth(用户名,密码)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/35.png" loading="lazy"></p>
+<h2 id="创建其他角色"><a href="#创建其他角色" class="headerlink" title="创建其他角色"></a>创建其他角色</h2><h3 id="准备-2"><a href="#准备-2" class="headerlink" title="准备"></a>准备</h3><p>添加用户shop1可以读取shop数据库</p>
+<p>添加用户shop2可以读写shop数据库</p>
+<p>注意：在对应的数据库内创建角色</p>
+<p>测试数据</p>
+<pre class="line-numbers language-none"><code class="language-none">use shop;
+for(var i &#x3D; 1;i &lt;&#x3D; 10;i++)&#123;
+	db.goods.insert(&#123;&quot;name&quot;:&quot;goodName&quot;+i,&quot;price&quot;:i&#125;);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="添加用户并设置权限"><a href="#添加用户并设置权限" class="headerlink" title="添加用户并设置权限"></a>添加用户并设置权限</h3><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; shop1
+use shop
+db.createUser(&#123;
+	&quot;user&quot;:&quot;shop1&quot;,
+	&quot;pwd&quot;:&quot;admin888&quot;,
+	&quot;roles&quot;:[&#123;
+		role:&quot;read&quot;,
+		db:&quot;shop&quot;
+	&#125;]
+&#125;)
+&#x2F;&#x2F; shop2
+db.createUser(&#123;
+	&quot;user&quot;:&quot;shop2&quot;,
+	&quot;pwd&quot;:&quot;admin888&quot;,
+	&quot;roles&quot;:[&#123;
+		role:&quot;readWrite&quot;,
+		db:&quot;shop&quot;
+	&#125;]
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/cloudimg@master/mongodb/36.png" loading="lazy"></p>
+<h1 id="Mongodb-备份还原"><a href="#Mongodb-备份还原" class="headerlink" title="Mongodb 备份还原"></a>Mongodb 备份还原</h1><h2 id="备份数据库mongodump"><a href="#备份数据库mongodump" class="headerlink" title="备份数据库mongodump"></a>备份数据库mongodump</h2><p><strong>语法</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">mongodump -h -port -u -p -d -o导出语法说明
+
+-h	host			服务器IP地址(一般不写默认本机
+-p	ort				端口(一般不写默认27017
+-u	user			账号
+-p	pwd				密码
+-d	database	数据库(数据库不写则导出全部
+-o	open			备份到指定目录下<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>备份所有数据: </p>
+<pre class="line-numbers language-none"><code class="language-none">mongodump -u 8963-p 8963root -o F:\data\mongodb\bak<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>备份指定数据</p>
+<pre class="line-numbers language-none"><code class="language-none">mongodump -u 8963 -p 8963root -d test -o F:\data\mongodb\bak2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<h2 id="还原数据库mongorestore"><a href="#还原数据库mongorestore" class="headerlink" title="还原数据库mongorestore"></a>还原数据库mongorestore</h2><p>语法</p>
+<pre class="line-numbers language-none"><code class="language-none">mongorestore -h -port -u -p -d--drop备份数据目录还原数据说明:
+-h
+-port
+-u
+-p
+-d			不写则还原全部数据库
+--drop	先删除数据库再导入<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>还原所有数据: </p>
+<pre class="line-numbers language-none"><code class="language-none">mongorestore -u 8963 -p 8963root --drop F:\data\mongodb\bak<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>还原指定数据</p>
+<pre class="line-numbers language-none"><code class="language-none">mongorestore -u 8963 -p 8963root -d test --drop F:\data\mongodb\bak\test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>8963</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="https://k8963.github.io/2021/01/29/Mongodb%E7%A8%8D%E5%BE%AE%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/" title="Mongodb稍微高级操作">https://k8963.github.io/2021/01/29/Mongodb%E7%A8%8D%E5%BE%AE%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> 许可协议。</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/02/03/Mongodb%E6%8E%A5%E5%8F%A3%E5%AE%9E%E6%88%98%E5%B0%8F%E7%BB%83%E4%B9%A0/" rel="prev" title="Mongodb接口实战小练习"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Mongodb接口实战小练习</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/01/28/Mongodb%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" rel="next" title="Mongodb基础操作"><span class="post-nav-text">Mongodb基础操作</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2020 – 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 8963</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
