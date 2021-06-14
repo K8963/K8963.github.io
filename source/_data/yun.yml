@@ -125,7 +125,7 @@ codeblock:
     dark: tomorrow
 # 标签彩色词云
 wordcloud:
-  enable: true
+  enable: false
 
 sidebar:
   bg_image: https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-1.jpg
