@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="8963"><meta name="copyright" content="8963"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>Grid布局.md | 8963核电站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"example.com","root":"/","title":"8963核电站","version":"1.10.6","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"/data/sentences.json"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="CSS 布局 - GridGrid 布局即网格布局，是一种新的 CSS 布局模型，比较擅长将一个页面划分为几个主要区域，以及定义这些区域的大小、位置、层次等关系。 开启Grid布局#gridBox &amp;#123;   display:grid   &#x2F;* 或 display:inline-grid *&#x2F; &amp;#125;  这样 #gridBox 成为了一个&#x3D;&#x3D;网格容器&#x3D;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grid布局.md">
+<meta property="og:url" content="http://example.com/2020/07/23/%E5%89%8D%E7%AB%AF/css/Grid%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="8963核电站">
+<meta property="og:description" content="CSS 布局 - GridGrid 布局即网格布局，是一种新的 CSS 布局模型，比较擅长将一个页面划分为几个主要区域，以及定义这些区域的大小、位置、层次等关系。 开启Grid布局#gridBox &amp;#123;   display:grid   &#x2F;* 或 display:inline-grid *&#x2F; &amp;#125;  这样 #gridBox 成为了一个&#x3D;&#x3D;网格容器&#x3D;&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070814919.png">
+<meta property="article:published_time" content="2020-07-23T09:59:00.000Z">
+<meta property="article:modified_time" content="2022-09-07T00:16:08.970Z">
+<meta property="article:author" content="8963">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070814919.png"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="8963"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="8963"><span class="site-author-status" title="摆烂到底">😡</span></a><div class="site-author-name"><a href="/about/">8963</a></div><a class="site-name" href="/about/site.html">8963核电站</a><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">43</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-line"></span></span><span class="site-state-item-count">29</span></a></div><a class="site-state-item hty-icon-button" href="/about/" title="我"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:aliens-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/K8963" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-%E5%B8%83%E5%B1%80-Grid"><span class="toc-number">1.</span> <span class="toc-text">CSS 布局 - Grid</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%90%AFGrid%E5%B8%83%E5%B1%80"><span class="toc-number">1.1.</span> <span class="toc-text">开启Grid布局</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grid-%E5%AE%B9%E5%99%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">Grid 容器属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E5%AE%BD-%E8%A1%8C%E9%AB%98"><span class="toc-number">2.1.</span> <span class="toc-text">列宽 \ 行高</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E9%97%B4%E8%B7%9D-%E5%88%97%E9%97%B4%E8%B7%9D"><span class="toc-number">2.2.</span> <span class="toc-text">行间距 \ 列间距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8C%BA%E5%9F%9F"><span class="toc-number">2.3.</span> <span class="toc-text">定义区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%B8%83%E5%B1%80%E7%AE%97%E6%B3%95"><span class="toc-number">2.4.</span> <span class="toc-text">自动布局算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%86%85%E5%AE%B9%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text">项目内容位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%80%E6%9C%89%E9%A1%B9%E7%9B%AE%E4%BD%8D%E7%BD%AE"><span class="toc-number">2.6.</span> <span class="toc-text">所有项目位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E7%BD%91%E6%A0%BC-%E5%88%97%E5%AE%BD-x2F-%E8%A1%8C%E9%AB%98"><span class="toc-number">2.7.</span> <span class="toc-text">隐式网格 列宽 &#x2F; 行高</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grid-%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">Grid 项目属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%BE%B9%E6%A1%86"><span class="toc-number">3.1.</span> <span class="toc-text">项目的边框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8D%95%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="toc-number">3.2.</span> <span class="toc-text">定义单个项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E4%BD%8D%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">内容位置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grid%E5%B8%83%E5%B1%80-%E4%B8%8E-Flex%E5%B8%83%E5%B1%80"><span class="toc-number">4.</span> <span class="toc-text">Grid布局 与 Flex布局</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://example.com/2020/07/23/%E5%89%8D%E7%AB%AF/css/Grid%E5%B8%83%E5%B1%80/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="8963"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="8963核电站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Grid布局.md</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <span class="post-meta-icon-text">发表于</span> <time title="创建时间：2020-07-23 17:59:00" itemprop="dateCreated datePublished" datetime="2020-07-23T17:59:00+08:00">2020-07-23</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E5%89%8D%E7%AB%AF/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">前端</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/CSS/" style="--text-color:#5298d1"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">CSS</span></a></span></div><div class="post-author"><span class="author-name">8963</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><h1 id="CSS-布局-Grid"><a href="#CSS-布局-Grid" class="headerlink" title="CSS 布局 - Grid"></a>CSS 布局 - Grid</h1><p><code>Grid</code> 布局即网格布局，是一种新的 <code>CSS</code> 布局模型，比较擅长将一个页面划分为几个主要区域，以及定义这些区域的大小、位置、层次等关系。</p>
+<h2 id="开启Grid布局"><a href="#开启Grid布局" class="headerlink" title="开启Grid布局"></a>开启Grid布局</h2><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span>grid
+  <span class="token comment">/* 或 display:inline-grid */</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>这样 <code>#gridBox</code> 成为了一个&#x3D;&#x3D;网格容器&#x3D;&#x3D;，这个元素的所有直系子元素将成为&#x3D;&#x3D;网格项目&#x3D;&#x3D;。</p>
+<p>声明 <code>display：grid</code> 则该容器是一个块级元素，设置成 <code>display: inline-grid</code> 则容器元素为行内元素</p>
+<h1 id="Grid-容器属性"><a href="#Grid-容器属性" class="headerlink" title="Grid 容器属性"></a>Grid 容器属性</h1><h2 id="列宽-行高"><a href="#列宽-行高" class="headerlink" title="列宽 \ 行高"></a>列宽 \ 行高</h2><p><code>grid-template-columns</code> 属性设置列宽,<code>grid-template-rows</code> 属性设置行高</p>
+<p>属性值:</p>
+<p><code>px</code></p>
+<p>设置几列&#x2F;几行，每列的宽度&#x2F;高度固定px</p>
+<p><code>repeat(重复次数, 重复的值)</code></p>
+<p> 简化重复, 参数repeat(重复次数, 重复的值)</p>
+<p><code>auto-fill</code></p>
+<p>自动填充, 列的数量不固定, 只要浏览器能够容纳得下</p>
+<p><code>fr</code></p>
+<p><code>fr</code> 单位代表网格容器中可用空间的一等份。</p>
+<blockquote>
+<p><code>grid-template-columns: 200px 1fr 2fr</code> </p>
+<p>表示第一个列宽设置为 200px，后面剩余的宽度分为两部分，宽度分别为剩余宽度的 1&#x2F;3 和 2&#x2F;3</p>
+</blockquote>
+<p><code>minmax()</code></p>
+<p>两个参数，分别为最小值和最大值, 产生一个长度范围，表示长度就在这个范围之中都可以应用到网格项目中.</p>
+<blockquote>
+<p><code>grid-template-columns: 1fr 1fr minmax(300px, 2fr)</code> </p>
+<p>表示第三个列宽最少也是要 300px，但是最大不能大于第一第二列宽的两倍。</p>
+</blockquote>
+<p><code>auto</code></p>
+<p>由浏览器决定长度。</p>
+<p>例子：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token comment">/* 固定px */</span>
+<span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 200px 100px 200px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> 50px 50px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* repeat() - 简化重复 */</span>
+<span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 200px 100px 200px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>2<span class="token punctuation">,</span>50px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* auto-fill - 自动填充 */</span>
+<span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+	<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fill<span class="token punctuation">,</span> 200px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* fr */</span>
+<span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 200px 1fr 2fr<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* minmax() */</span>
+<span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 1fr 1fr <span class="token function">minmax</span><span class="token punctuation">(</span>300px<span class="token punctuation">,</span> 2fr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* auto 由浏览器决定,实现三列布局 */</span>
+<span class="token selector">#gridBox</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 100px auto 100px
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="行间距-列间距"><a href="#行间距-列间距" class="headerlink" title="行间距 \ 列间距"></a>行间距 \ 列间距</h2><p><code>grid-row-gap</code> 属性、<code>grid-column-gap</code> 属性分别设置行间距和列间距。<code>grid-gap</code> 属性是两者的简写形式。</p>
+<blockquote>
+<p>{ grid-row-gap: 10px;grid-column-gap: 20px; }</p>
+<p>&#x3D;&#x3D;&#x3D;</p>
+<p>{ grid-gap: 10px 20px; }</p>
+</blockquote>
+<h2 id="定义区域"><a href="#定义区域" class="headerlink" title="定义区域"></a>定义区域</h2><p><code>grid-template-areas</code> 属性用于定义区域，一个区域由一个或者多个单元格组成</p>
+<p>一般与项目属性组合使用 <code>grid-area</code> 属性指定项目放在哪一个区域.</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.wrapper</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> 120px auto 120px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">". header header"</span> <span class="token string">"sidebar content content"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.sidebar</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">grid-area</span><span class="token punctuation">:</span> sidebar<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.content</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">grid-area</span><span class="token punctuation">:</span> content<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.header</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">grid-area</span><span class="token punctuation">:</span> header<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<blockquote>
+<p><code>grid-template-areas: &quot;. header header&quot; &quot;sidebar content content&quot;;</code></p>
+<p>表示划分出 6 个单元格,并设置每个单元格的内容,  <code>.</code>  表示此单元格为空</p>
+<p><code>grid-area</code></p>
+<p>为当前项目指定容器中的位置</p>
+</blockquote>
+<h2 id="自动布局算法"><a href="#自动布局算法" class="headerlink" title="自动布局算法"></a>自动布局算法</h2><p><code>grid-auto-flow</code> 属性控制着自动布局算法怎样运作，精确指定在网格中被自动布局的元素怎样排列。默认的放置顺序是”先行后列”，即先填满第一行，再开始放入第二行</p>
+<blockquote>
+<p>grid-auto-flow: row; 默认先行后列</p>
+<p>grid-auto-flow: row dense;  尽可能填满表格</p>
+<p>grid-auto-flow: column; 先列后行</p>
+</blockquote>
+<h2 id="项目内容位置"><a href="#项目内容位置" class="headerlink" title="项目内容位置"></a>项目内容位置</h2><p><code>justify-items</code> 属性设置单元格内容的水平位置，<code>align-items</code> 属性设置单元格的垂直位置</p>
+<blockquote>
+<p>水平位置:左 | 中 | 右 | 拉伸占满单元格的整个宽度（默认值）</p>
+<p>justify-items: start | end | center | stretch; </p>
+<p>垂直位置:上 | 中 | 下 | 拉伸占满单元格的整个宽度（默认值）</p>
+<p>align-items: start | end | center | stretch;</p>
+</blockquote>
+<h2 id="所有项目位置"><a href="#所有项目位置" class="headerlink" title="所有项目位置"></a>所有项目位置</h2><p><code>justify-content</code> 属性是整个内容区域在容器里面的水平位置（左中右），<code>align-content</code> 属性是整个内容区域的垂直位置（上中下）。它们都有如下的属性值。</p>
+<blockquote>
+<p>水平位置: </p>
+<p>justify-content: start | end | center | stretch | space-around | space-between | space-evenly;  </p>
+<p>垂直位置</p>
+<p>align-content: start | end | center | stretch | space-around | space-between | space-evenly; </p>
+<ul>
+<li>start - 对齐容器的起始边框</li>
+<li>end - 对齐容器的结束边框</li>
+<li>center - 容器内部居中</li>
+<li>space-around - 每个项目两侧的间隔相等。所以，项目之间的间隔比项目与容器边框的间隔大一倍</li>
+<li>space-between - 项目与项目的间隔相等，项目与容器边框之间没有间隔</li>
+<li>space-evenly - 项目与项目的间隔相等，项目与容器边框之间也是同样长度的间隔</li>
+<li>stretch - 项目大小没有指定时，拉伸占据整个网格容器</li>
+</ul>
+</blockquote>
+<h2 id="隐式网格-列宽-x2F-行高"><a href="#隐式网格-列宽-x2F-行高" class="headerlink" title="隐式网格 列宽 &#x2F; 行高"></a>隐式网格 列宽 &#x2F; 行高</h2><p>隐式和显式网格：显式网格包含了你在 <code>grid-template-columns</code> 和 <code>grid-template-rows</code> 属性中定义的行和列。如果你在网格定义之外又放了一些东西，或者因为内容的数量而需要的更多网格轨道的时候，网格将会在隐式网格中创建行和列</p>
+<p>假如有多余的网格（也就是上面提到的隐式网格），那么它的行高和列宽可以根据 <code>grid-auto-columns</code> 属性和 <code>grid-auto-rows</code> 属性设置。它们的写法和<code>grid-template-columns</code> 和 <code>grid-template-rows</code> 完全相同。</p>
+<h1 id="Grid-项目属性"><a href="#Grid-项目属性" class="headerlink" title="Grid 项目属性"></a>Grid 项目属性</h1><h2 id="项目的边框"><a href="#项目的边框" class="headerlink" title="项目的边框"></a>项目的边框</h2><p>可以指定网格项目所在的四个边框，分别定位在哪根网格线，从而指定项目的位置</p>
+<ul>
+<li>grid-column-start 属性：左边框所在的垂直网格线</li>
+<li>grid-column-end 属性：右边框所在的垂直网格线</li>
+<li>grid-row-start 属性：上边框所在的水平网格线</li>
+<li>grid-row-end 属性：下边框所在的水平网格线</li>
+</ul>
+<h2 id="定义单个项目"><a href="#定义单个项目" class="headerlink" title="定义单个项目"></a>定义单个项目</h2><p><code>grid-area</code> 属性指定项目放在哪一个区域</p>
+<h2 id="内容位置"><a href="#内容位置" class="headerlink" title="内容位置"></a>内容位置</h2><p><code>justify-self</code> 属性设置单元格内容的水平位置（左中右）, <code>align-self</code> 属性设置单元格内容的垂直位置（上中下</p>
+<blockquote>
+<p>justify-self: start | end | center | stretch;  </p>
+<p>align-self: start | end | center | stretch;</p>
+</blockquote>
+<h1 id="Grid布局-与-Flex布局"><a href="#Grid布局-与-Flex布局" class="headerlink" title="Grid布局 与 Flex布局"></a>Grid布局 与 Flex布局</h1><p> <strong><code>flex</code> 布局是一维布局，<code>Grid</code> 布局是二维布局</strong>。</p>
+<p><code>flex</code> 布局一次只能处理一个维度上的元素布局，一行或者一列。</p>
+<p><code>Grid</code> 布局是将容器划分成了“行”和“列”，产生了一个个的网格，我们可以将网格元素放在与这些行和列相关的位置上，从而达到我们布局的目的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070814919.png" loading="lazy"></p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>8963</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://example.com/2020/07/23/%E5%89%8D%E7%AB%AF/css/Grid%E5%B8%83%E5%B1%80/" title="Grid布局.md">http://example.com/2020/07/23/%E5%89%8D%E7%AB%AF/css/Grid%E5%B8%83%E5%B1%80/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2020/08/29/%E5%90%8E%E7%AB%AF/PHP/Laravel%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96/" rel="prev" title="Laravel-项目初始化"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">Laravel-项目初始化</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2020/07/21/%E5%89%8D%E7%AB%AF/css/Flex%E5%B8%83%E5%B1%80/" rel="next" title="Flex 布局"><span class="post-nav-text">Flex 布局</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 8963</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
