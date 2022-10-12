@@ -1,3 +1,19 @@
+---
+title: CentOS
+date: 2022-01-18 23:10:00
+comments: false
+author: 8963
+tags:
+  - Linux
+categories:
+  - 其他
+
+---
+
+Docker容器的基本使用
+
+<!-- more -->
+
 [下载地址](https://mirrors.aliyun.com/centos/7/isos/x86_64/)
 
 各个版本的ISO镜像文件说明：
@@ -42,7 +58,7 @@ service network restart
 ip addr
 ```
 
-![image-20220929152152279](centos.assets/image-20220929152152279.png)
+![image-20220929152152279](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122324923.png)
 
 再次编辑`ifcfg-enp0s3`
 
@@ -67,7 +83,7 @@ GATEWAY=192.168.10.55
 检查NetManager管理的网络连接：nmcli connection show
 ```
 
-![image-20220929152746246](centos.assets/image-20220929152746246.png)
+![image-20220929152746246](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122324970.png)
 
 设置dns
 
@@ -81,7 +97,7 @@ nmcli con mod enp0s3 ipv4.dns “114.114.114.114 8.8.8.8”
 nmcli con up enp0s3
 ```
 
-![image-20220929153327452](centos.assets/image-20220929153327452.png)
+![image-20220929153327452](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122324739.png)
 
 完成上述步骤就可以用 ping 命令 ping一下 本地ip 是否可以ping 通
 
@@ -110,7 +126,7 @@ systemctl disable firewalld.service
 yum list installed | grep openssh-server
 ```
 
-![image-20220929154051430](centos.assets/image-20220929154051430.png)
+![image-20220929154051430](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122325830.png)
 
 表示已经安装
 
@@ -129,15 +145,15 @@ vi sshd_config
 
 关于监听端口、监听地址前的 # 号去除
 
-![image-20220929154920855](centos.assets/image-20220929154920855.png)
+![image-20220929154920855](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122325233.png)
 
 开启允许远程登录
 
-![image-20220929155017742](centos.assets/image-20220929155017742.png)
+![image-20220929155017742](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122325778.png)
 
 开启使用用户名密码来作为连接验证
 
-![image-20220929155054461](centos.assets/image-20220929155054461.png)
+![image-20220929155054461](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122325136.png)
 
 保存文件，退出。
 
@@ -155,13 +171,13 @@ ps -e | grep sshd
 netstat -an | grep 22
 ```
 
-![image-20220929155451893](centos.assets/image-20220929155451893.png)
+![image-20220929155451893](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122325438.png)
 
 
 
 查看CentOS7的属性，发现网络连接方式是采用的**NAT**方式连接的
 
-![image-20220929155615558](centos.assets/image-20220929155615558.png)
+![image-20220929155615558](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202210122325295.png)
 
 
 
