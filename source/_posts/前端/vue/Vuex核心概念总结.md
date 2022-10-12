@@ -10,7 +10,7 @@ categories:
   - 前端
 ---
 
-
+# Vuex核心概念总结
 
 ```javascript
 // store.js
