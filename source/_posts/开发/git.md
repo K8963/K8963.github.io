@@ -309,3 +309,27 @@ $ git clone 远程仓库地址 mylibgit
 克隆指定单个分支
 
 git clone -b +分支名+远程仓库地址git clone -b <branch-name> <remote-url>
+
+
+
+# bug
+
+`Failed to connect to github.com port 443 after 21038 ms: Timed out`
+
+设置代理，取消代理
+
+```
+git config --global https.proxy
+git config --global --unset https.proxy
+```
+
+
+
+`OpenSSL SSL_read: Connection was reset, errno 10054`
+
+解除SSL验证
+
+```
+git config --global http.sslVerify "false"
+```
+

@@ -19,6 +19,10 @@ Laravel-项目初始化
 
 > composer create-project laravel/laravel=(版本号).\* --prefer-dist ./
 
+```
+composer create-project --prefer-dist laravel/laravel blog 5.6.*
+```
+
 # 2.创建、连接数据库
 
 创建数据库，修改.env 文件，配置数据库连接操作

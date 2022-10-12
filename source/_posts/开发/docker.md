@@ -5,8 +5,9 @@ comments: false
 author: 8963
 tags:
   - Docker
-categories:
   - 开发环境
+categories:
+  - 开发
 ---
 
 Docker容器的基本使用
