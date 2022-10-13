@@ -10,7 +10,7 @@ categories:
 
 ---
 
-Docker容器的基本使用
+CentOS
 
 <!-- more -->
 
