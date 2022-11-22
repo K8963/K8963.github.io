@@ -156,3 +156,199 @@ css
   transition: all 1s;
 }
 ```
+
+# animate
+
+
+
+```
+npm install animate.css --save
+```
+
+main.ts
+
+```typescript
+import animate from 'animate.css'
+
+const app = createApp(App)
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+
+app.use(pinia).use(router).use(ElementPlus).use(animate).mount('#app')
+
+```
+
+
+
+# 字体
+
+全局css文件
+
+```scss
+@font-face {
+  font-family: 'LGQ'; //重命名字体名
+  src: url('../assets/font/柳公权柳体.ttf'); //引入字体
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HYFS'; //重命名字体名
+  src: url('../assets/font/汉仪仿宋S.ttf'); //引入字体
+  font-weight: normal;
+  font-style: normal;
+}
+
+```
+
+使用
+
+```scss
+  .titlt {
+    font-family: LGQ;
+  }
+```
+
+![image-20220920112857421](CSS 小技能.assets/image-20220920112857421.png)
+
+# 文字显示
+
+```css
+// 首行缩进两个字符
+text-indent: 2em;
+// 超出两行显示省略号
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 5;
+```
+
+
+
+# 编辑器
+
+vue3 文档：https://packy-tang.gitee.io/vue-tinymce/#/
+
+参考：https://blog.csdn.net/mrjimin/article/details/121648927
+
+```
+npm install --save "@tinymce/tinymce-vue@^4"
+```
+
+
+
+# 公共函数
+
+`src\utils\fun.ts`
+
+```typescript
+/**
+ * 是否为空
+ * @param val 判断值
+ */
+export function isEmpty(val: any) {
+  if (typeof val !== 'undefined' && val !== null && val !== '') {
+    return true
+  }
+  return false
+}
+
+/**
+ * 文章栏目遍历
+ * @param data 数据
+ */
+export function handleTreeData(data: Array<Object>) {
+  data.forEach((e) => {
+    e.label = e.name
+    e.value = e.id
+    if (e.children) {
+      handleTreeData(e.children)
+    }
+  })
+}
+
+/**
+ * @description 判断数据类型
+ * @param val 需要判断类型的数据
+ * @returns {string} 数据类型
+ */
+export function isType(val: any) {
+  if (val === null) return 'null'
+  if (typeof val !== 'object') return typeof val
+  else
+    return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase()
+}
+
+/**
+ * @description 对象数组深克隆
+ * @param obj 源对象
+ * @returns {obj} 克隆后的对象
+ */
+export function deepCopy<T>(obj: any): T {
+  let newObj: any
+  try {
+    newObj = obj.push ? [] : {}
+  } catch (error) {
+    newObj = {}
+  }
+  for (let attr in obj) {
+    if (typeof obj[attr] === 'object') {
+      newObj[attr] = deepCopy(obj[attr])
+    } else {
+      newObj[attr] = obj[attr]
+    }
+  }
+  return newObj
+}
+
+/**
+ * @description 获取localStorage
+ * @param key Storage名称
+ * @returns {String} Storage值
+ */
+export function localGet(key: string) {
+  const value = window.localStorage.getItem(key)
+  try {
+    return JSON.parse(window.localStorage.getItem(key) as string)
+  } catch (error) {
+    return value
+  }
+}
+
+/**
+ * @description 存储localStorage
+ * @param key Storage名称
+ * @param value Storage值
+ */
+export function localSet(key: string, value: any) {
+  window.localStorage.setItem(key, JSON.stringify(value))
+}
+
+```
+
+
+
+# 媒体查询
+
+```
+/* 在小于或等于 992 像素的屏幕上，将背景色设置为蓝色 */
+@media screen and (max-width: 992px) {
+  body {
+    background-color: blue;
+  }
+}
+
+/* 在 600 像素或更小的屏幕上，将背景色设置为橄榄色 */
+@media screen and (max-width: 600px) {
+  body {
+    background-color: olive;
+  }
+}
+// d
+@media screen and (min-width: 1400px) {
+    height: 400px;
+  }
+```

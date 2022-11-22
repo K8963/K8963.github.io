@@ -45,6 +45,22 @@ vue 生命周期、v-if 和 v-show 的区别、computed 和 watch 的区别、v-
 > -   tsconfig.node.json
 > -   vite.config.ts
 
+## 安装依赖
+
+生产
+
+```
+npm i -S vue-router@next nprogress axios pinia pinia-plugin-persistedstate qs
+```
+
+开发
+
+```
+npm i -D eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier
+```
+
+
+
 ## 定义别名
 
 `vite.config.ts`
@@ -52,13 +68,211 @@ vue 生命周期、v-if 和 v-show 的区别、computed 和 watch 的区别、v-
 ```ts
 import path from 'path'
 
+const resolve = (dir: string) => path.join(__dirname, dir)
 // https://vitejs.dev/config/
 export default defineConfig({
-  alias: {
-    '@': path.resolve(__dirname, 'src'),
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': resolve('src'),
+    },
   },
 })
 ```
+
+`tsconfig.json`
+
+```json
+"compilerOptions": {
+  // 解析非相对模块名的基准目录
+  "baseUrl": "./",
+  // 模块名到基于 baseUrl的路径映射的列表。
+  "paths": {
+  "@":["./src"],
+  "@/*":["./src/*"] 
+  }
+}
+```
+
+
+
+# vite
+
+插件
+
+```
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.0",
+```
+
+- vite-plugin-compression
+
+  开启gzip压缩
+
+- vite-plugin-html
+
+  - HTML 压缩能力
+  - EJS 模版能力
+
+# config
+
+## 创建配置文件
+
+- .env
+
+  ```
+  # title
+  VITE_GLOB_APP_TITLE = 'club'
+  
+  # port
+  VITE_PORT = 3000
+  
+  # open 运行 npm run dev 时自动打开浏览器
+  VITE_OPEN = true
+  
+  # 是否生成包预览文件
+  VITE_REPORT = false
+  
+  # 是否开启gzip压缩
+  VITE_BUILD_GZIP = false
+  
+  # 是否删除生产环境 console
+  VITE_DROP_CONSOLE = true
+  ```
+
+  
+
+- .env.development
+
+  ```
+  # 本地环境
+  NODE_ENV = 'development'
+  
+  # 本地环境接口地址
+  VITE_API_URL = 'http://localhost:8081'
+  ```
+
+  
+
+- .env.production
+
+  ```
+  # 线上环境
+  NODE_ENV = "production"
+  
+  # 线上环境接口地址
+  VITE_API_URL = ""
+  ```
+
+  
+
+# 代码规范
+
+## Prettier
+
+代码格式化工具,根目录下创建一个名为 `.prettierrc.js` 的文件
+
+```js
+// @see: https://www.prettier.cn
+
+module.exports = {
+  // 超过最大值换行
+  printWidth: 130,
+  // 缩进字节数
+  tabWidth: 2,
+  // 使用制表符而不是空格缩进行
+  useTabs: true,
+  // 结尾不用分号(true有，false没有)
+  semi: false,
+  // 使用单引号(true单双引号，false双引号)
+  singleQuote: false,
+  // 更改引用对象属性的时间 可选值"<as-needed|consistent|preserve>"
+  quoteProps: 'as-needed',
+  // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
+  bracketSpacing: true,
+  // 多行时尽可能打印尾随逗号。（例如，单行数组永远不会出现逗号结尾。） 可选值"<none|es5|all>"，默认none
+  trailingComma: 'none',
+  // 在JSX中使用单引号而不是双引号
+  jsxSingleQuote: false,
+  //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号 ,always：不省略括号
+  arrowParens: 'avoid',
+  // 如果文件顶部已经有一个 doclock，这个选项将新建一行注释，并打上@format标记。
+  insertPragma: false,
+  // 指定要使用的解析器，不需要写文件开头的 @prettier
+  requirePragma: false,
+  // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
+  proseWrap: 'preserve',
+  // 在html中空格是否是敏感的 "css" - 遵守CSS显示属性的默认值， "strict" - 空格被认为是敏感的 ，"ignore" - 空格被认为是不敏感的
+  htmlWhitespaceSensitivity: 'css',
+  // 换行符使用 lf 结尾是 可选值"<auto|lf|crlf|cr>"
+  endOfLine: 'auto',
+  // 这两个选项可用于格式化以给定字符偏移量（分别包括和不包括）开始和结束的代码
+  rangeStart: 0,
+  rangeEnd: Infinity,
+  // Vue文件脚本和样式标签缩进
+  vueIndentScriptAndStyle: false,
+}
+```
+
+
+
+## ESLint
+
+查找 JavaScript / TypeScript 代码问题并提供修复建议的工具,项目根目录下创建一个名为 `.eslintrc.js` 文件,更多的选项可以在 ESLint 官网的 [Configuring ESLint](https://eslint.org/docs/user-guide/configuring/) 查阅。
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+    browser: true,
+  },
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', 'prettier'],
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    ecmaVersion: 2020,
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint', 'prettier'],
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'prettier/prettier': 'warn',
+    'vue/multi-word-component-names': 'off',
+  },
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
+  },
+}
+```
+
+> 配合 TypeScript 使用
+
+安装对应依赖
+
+- [eslint](https://www.npmjs.com/package/eslint)
+- [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)
+- [eslint-plugin-prettier](https://www.npmjs.com/package/eslint-plugin-prettier)
+- [eslint-plugin-vue](https://www.npmjs.com/package/eslint-plugin-vue)
+- [@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin)
+- [@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser)
+- [prettier](https://www.npmjs.com/package/prettier)
+
+```bash
+npm i -D eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier
+```
+
+如果有一些文件需要排除检查，可以再创建一个 `.eslintignore` 文件在项目根目录下，里面添加要排除的文件或者文件夹名称：
+
+```
+dist/*
+```
+
+更多的排除规则可以在 ESLint 官网的 [The .eslintignore File](https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file) 一文查阅。
 
 # element-plus
 
@@ -76,10 +290,26 @@ const app = createApp(App)
 app.use(ElementPlus)
 ```
 
-# router
+# 路由
 
 ```
 npm i vue-router@next -S
+```
+
+目录结构
+
+```
+src
+│ # 路由目录
+├─router
+│   # 路由入口文件
+├───index.ts
+│   # 路由配置
+├───routes.ts
+│ # 项目入口文件
+├───modules
+│ # 路由模块
+└─main.ts
 ```
 
 `routers/index.ts`
