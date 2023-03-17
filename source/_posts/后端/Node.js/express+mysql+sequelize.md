@@ -12,7 +12,9 @@ categories:
 
 ---
 
+express+mysql+sequelize
 
+<!-- more -->
 
 # 创建项目
 

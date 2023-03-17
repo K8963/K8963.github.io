@@ -1,10 +1,27 @@
+---
+title: springboot项目
+date: 2023-01-18 12:52:39
+comments: false
+author: 8963
+tags:
+  - Java
+  - SpringBoot
+categories:
+  - 后端
+---
+
+
+springboot项目模板
+
+<!-- more -->
+
 # 创建项目
 
-![image-20221116104212647](springboot项目模板.assets/image-20221116104212647.png)
+![image-20221116104212647](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202303171306433.png)
 
-![image-20221116104353934](springboot项目模板.assets/image-20221116104353934.png)
+![image-20221116104353934](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202303171306049.png)
 
-![image-20221116104424473](springboot项目模板.assets/image-20221116104424473.png)
+![image-20221116104424473](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202303171306036.png)
 
 选择项目位置，完成
 
@@ -617,7 +634,7 @@ public JSONObject login(String username, String password)  throws SystemExceptio
 
 返回
 
-![image-20221119001421447](springboot项目模板.assets/image-20221119001421447.png)
+![image-20221119001421447](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202303171305784.png)
 
 # 通用返回
 
@@ -656,5 +673,4 @@ public class ResultInfo<T> {
     }
 }
 ```
-
 

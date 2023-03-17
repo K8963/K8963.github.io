@@ -12,7 +12,7 @@ categories:
   - 前端
 ---
 
-vue 生命周期、v-if 和 v-show 的区别、computed 和 watch 的区别、v-for 中 key 的作用、组件传值
+vue3+ts+pinia+element_plus
 
 <!-- more -->
 

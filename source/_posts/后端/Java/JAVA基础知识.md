@@ -9,6 +9,10 @@ categories:
   - 后端
 ---
 
+Java 基础知识
+
+<!-- more -->
+
 # Java 基础
 
 ## 数据类型
