@@ -312,3 +312,38 @@ Systrintln(average);
 
 
 
+# List
+
+`List`是最基础的一种集合：它是一种有序列表。
+
+`List`的行为和数组几乎完全相同：`List`内部按照放入元素的先后顺序存放，每个元素都可以通过索引确定自己的位置，`List`的索引和数组一样，从`0`开始。
+
+`List<E>`主要的接口方法：
+
+- 在末尾添加一个元素：`boolean add(E e)`
+- 在指定索引添加一个元素：`boolean add(int index, E e)`
+- 删除指定索引的元素：`E remove(int index)`
+- 删除某个元素：`boolean remove(Object e)`
+- 获取指定索引的元素：`E get(int index)`
+- 获取链表大小（包含元素的个数）：`int size()`
+
+```java
+List<String> list = new ArrayList<>();
+list.add("apple"); // size=1
+list.add("pear"); // size=2
+list.add("apple"); // 允许重复添加元素，size=3
+System.out.println(list.size());
+```
+
+
+
+# Map
+
+`Map`是键值（key-value）映射表的数据结构，能高效通过`key`快速查找`value`（元素）
+
+操作
+
+```
+Map<String, List> map = new HashMap<>();
+```
+

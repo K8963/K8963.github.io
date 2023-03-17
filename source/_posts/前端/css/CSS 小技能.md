@@ -1,5 +1,5 @@
 ---
-title: CSS 小技能
+title: CSS速查
 date: 2021-03-10 12:10:00
 comments: false
 author: 8963
@@ -216,8 +216,6 @@ app.use(pinia).use(router).use(ElementPlus).use(animate).mount('#app')
 # 文字显示
 
 ```css
-// 首行缩进两个字符
-text-indent: 2em;
 // 超出两行显示省略号
 overflow: hidden;
 text-overflow: ellipsis;
@@ -226,7 +224,39 @@ display: -webkit-box;
 -webkit-line-clamp: 5;
 ```
 
+## 缩进
 
+```css
+// 首行缩进两个字符
+text-indent: 2em;
+```
+
+
+
+## 方向
+
+```css
+// 从左到右水平流动，从上到下垂直流动
+writing-mode: horizontal-tb;
+// 从上到下垂直流动，从右到左水平流动。
+writing-mode: vertical-rl;
+// 从上到下垂直流动，从左到右水平流动。
+writing-mode: vertical-lr;
+```
+
+
+
+## 间距
+
+```css
+letter-spacing: 5px;
+```
+
+## 阴影
+
+```css
+text-shadow: 0.1em 0.1em 0.05em #333
+```
 
 # 编辑器
 
@@ -352,3 +382,39 @@ export function localSet(key: string, value: any) {
     height: 400px;
   }
 ```
+
+
+
+# 4个边框颜色不同
+
+border-top-color、border-bottom-color、border-left-color、border-right-color属性
+
+
+
+# 四个不同圆角
+
+- **四个值:** 第一个值为左上角，第二个值为右上角，第三个值为右下角，第四个值为左下角。
+- **三个值:** 第一个值为左上角, 第二个值为右上角和左下角，第三个值为右下角
+- **两个值:** 第一个值为左上角与右下角，第二个值为右上角与左下角
+- **一个值：** 四个圆角值相同
+
+
+
+# 透明度
+
+```css
+img {
+  opacity: 0.5;
+}
+```
+
+# Input
+
+## placeholder颜色
+
+```css
+选中元素::input-placeholder{
+	color:red;
+}
+```
+

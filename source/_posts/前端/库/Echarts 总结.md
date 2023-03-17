@@ -285,3 +285,20 @@ toolbox: {
 }
 ```
 
+# visualMap
+
+```
+lt（小于，less than），
+
+gt（大于，greater than），
+
+lte（小于等于 less than or equals），
+
+gte（大于等于，greater than or equals）来表达边界
+```
+
+https://blog.csdn.net/weixin_57871623/article/details/121207451
+
+
+
+https://www.runoob.com/echarts/echarts-visualmap.html
