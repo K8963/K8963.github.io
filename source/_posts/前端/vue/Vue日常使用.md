@@ -1,3 +1,19 @@
+---
+title:Vue日常使用
+date: 2022-11-14 10:30:00
+comments: false
+author: 8963
+tags:
+  - vue
+categories:
+  - 前端
+---
+
+Vue日常使用
+
+<!-- more -->
+
+
 # 父组件数据联动子组件
 
 父组件向子组件传递数据，当父组件数据修改时，子组件一并修改，使用watch
