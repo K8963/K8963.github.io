@@ -59,11 +59,11 @@ location / {
 }
 ```
 
-![image-20220910151806371](Laravel模块开发.assets/image-20220910151806371-16841337449951.png)
+![image-20220910151806371](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151534497.png)
 
 执行域名加模块名
 
-![image-20220910152632785](Laravel模块开发.assets/image-20220910152632785-16841337449962.png)
+![image-20220910152632785](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151534281.png)
 
 # 数据迁移
 
@@ -153,7 +153,7 @@ api 接口开发中,路由应当定义在 `api.php`中 , 在请求时需要在 �
 
 如:
 
-![image-20220910155248133](Laravel模块开发.assets/image-20220910155248133-16841338067304.png)
+![image-20220910155248133](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151534443.png)
 
 ## 参数
 
@@ -169,7 +169,7 @@ Route::get('/test/{id?}', function (Request $request,$id = 666) {
 });
 ```
 
-![image-20220910162930953](Laravel模块开发.assets/image-20220910162930953-16841338067305.png)
+![image-20220910162930953](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151535491.png)
 
 ## 请求方式
 
@@ -266,7 +266,7 @@ protected $routeMiddleware = [
 ];
 ```
 
-![image-20220910182102180](Laravel模块开发.assets/image-20220910182102180-16841338067306.png)
+![image-20220910182102180](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151535042.png)
 
 
 
@@ -434,7 +434,7 @@ class IndexController extends Controller
 
 先将验证文件中显示验证信息方法注释
 
-![image-20220911121000397](Laravel模块开发.assets/image-20220911121000397-16841338067307.png)
+![image-20220911121000397](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151535221.png)
 
 `app\Exceptions\Handler.php`
 
@@ -1473,4 +1473,4 @@ class LoginController extends BaseApiController
 
 ## 请求
 
-![image-20220912100925701](Laravel模块开发.assets/image-20220912100925701-16841338067213.png)
+![image-20220912100925701](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305151535406.png)
