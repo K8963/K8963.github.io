@@ -1,8 +1,8 @@
 ---
-title: Mongodb中级操作
-date: 2021-01-29 17:46:25
-comments: false
-author: 8963
+title:Mongodb中级操作
+date:2021-01-29 17:46:25
+comments:false
+author:8963
 tags:
   - Mongodb
 categories:

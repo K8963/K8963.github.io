@@ -1,8 +1,8 @@
 ---
-title: Vuex核心概念总结
-date: 2020-11-13 17:22:30
-comments: false
-author: 8963
+title:Vuex核心概念总结
+date:2020-11-13 17:22:30
+comments:false
+author:8963
 tags:
   - vuex
   - vue

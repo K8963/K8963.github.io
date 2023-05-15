@@ -1,8 +1,8 @@
 ---
-title: JavaScript数组
-date: 2020-02-03 07:59:00
-comments: false
-author: 8963
+title:JavaScript数组
+date:2020-02-03 07:59:00
+comments:false
+author:8963
 tags:
   - JavaScript
 categories:

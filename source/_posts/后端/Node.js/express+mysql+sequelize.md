@@ -1,8 +1,8 @@
 ---
-title: express+mysql+sequelize 创建项目
-date: 2022-03-18 12:52:39
-comments: false
-author: 8963
+title:express+mysql+sequelize 创建项目
+date:2022-03-18 12:52:39
+comments:false
+author:8963
 tags:
   - sequelize 
   - express

@@ -1,8 +1,8 @@
 ---
-title: JavaScript数据结构
-date: 2020-06-10 07:59:00
-comments: false
-author: 8963
+title:JavaScript数据结构
+date:2020-06-10 07:59:00
+comments:false
+author:8963
 tags:
   - 数据结构
   - JavaScript

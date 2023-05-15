@@ -1,8 +1,8 @@
 ---
-title: Java 基础知识
-date: 2022-03-18 12:52:39
-comments: false
-author: 8963
+title:Java 基础知识
+date:2022-03-18 12:52:39
+comments:false
+author:8963
 tags:
   - Java
 categories:

@@ -1,8 +1,8 @@
 ---
-title: Echarts 常用总结
-date: 2021-04-10 12:10:00
-comments: false
-author: 8963
+title:Echarts 常用总结
+date:2021-04-10 12:10:00
+comments:false
+author:8963
 tags:
   - echarts
   - JavaScript

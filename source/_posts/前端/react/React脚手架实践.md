@@ -1,7 +1,7 @@
 ---
-title: React脚手架实践
-date: 2021-05-12 20:38:00
-comments: false
+title:React脚手架实践
+date:2021-05-12 20:38:00
+comments:false
 tags: 
   - JavaScript
   - React
