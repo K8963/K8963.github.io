@@ -132,6 +132,16 @@ box-shadow: darkgrey 0px 0px 8px 3px;
 box-shadow: darkgrey 0px 0px 8px 3px inset;
 ```
 
+## 三个方向的阴影
+
+```
+box-shadow: -5px -5px 10px rgba(0, 0, 0, 0.3),
+            5px -5px 10px rgba(0, 0, 0, 0.3),
+            -5px 5px 10px rgba(0, 0, 0, 0.3);
+```
+
+
+
 # 旋转
 
 模拟方向盘旋转
@@ -213,7 +223,17 @@ app.use(pinia).use(router).use(ElementPlus).use(animate).mount('#app')
 
 ![image-20220920112857421](CSS 小技能.assets/image-20220920112857421.png)
 
-# 文字显示
+# 文字
+
+## p标签不换行
+
+```css
+p{
+	white-space: normal;
+}
+```
+
+## 省略号显示
 
 ```css
 // 超出两行显示省略号
