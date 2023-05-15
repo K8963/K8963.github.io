@@ -1,18 +1,16 @@
 ---
-title: vue3+ts+pinia+element_plus
+itle: vue路由
 date: 2022-05-01 12:59:00
 comments: false
 author: 8963
 tags:
   - vue3
-  - pinia
-  - TypeScript
-  - element_plus
+  - vue路由
 categories:
   - 前端
 ---
 
-vue3+ts+pinia+element_plus
+vue路由
 
 <!-- more -->
 
