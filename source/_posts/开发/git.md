@@ -10,7 +10,9 @@ categories:
   - 开发
 ---
 
+git的基本使用
 
+<!-- more -->
 
 # git 相关名词解释
 

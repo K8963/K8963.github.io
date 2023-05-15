@@ -1,3 +1,18 @@
+---
+title: vscode
+date: 2022-09-18 23:10:00
+comments: false
+author: 8963
+tags:
+  - vscode
+categories:
+  - 开发
+---
+
+vscode 插件配置
+
+<!-- more -->
+
 # 插件
 
 ## Volar
