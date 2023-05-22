@@ -6,7 +6,7 @@ author:8963
 tags:
   - vscode
 categories:
-  - 开发
+  - 其他
 ---
 
 vscode 插件配置

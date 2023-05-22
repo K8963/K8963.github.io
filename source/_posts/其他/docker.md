@@ -7,7 +7,7 @@ tags:
   - Docker
   - 开发环境
 categories:
-  - 开发
+  - 其他
 ---
 
 Docker容器的基本使用

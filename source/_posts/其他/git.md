@@ -7,7 +7,7 @@ tags:
   - 开发工具
   - git
 categories:
-  - 开发
+  - 其他
 ---
 
 git的基本使用
@@ -45,14 +45,18 @@ git的基本使用
 
 安装完 Git 之后，要做的第一件事就是设置你的用户名和邮件地址。 这一点很重要，因为每一个 Git 提交都会使用这些信息，它们会写入到你的每一次提交中，不可更改：
 
+```
  $ git config --global user.name "用户名称"  
  $ git config --global user.email "用户email"
+```
 
 # 创建本地仓库
 
 空文件夹 或者 有内容文件夹 都可以使用此命令创建仓库
 
+```
  $ git init
+```
 
 执行后生成一个 `.git` 文件夹
 
@@ -62,15 +66,21 @@ git的基本使用
 
 把单个文件添加到仓库
 
+```
  $ git add 文件名
+```
 
 把所有文件添加到仓库
 
+```
  $ git add .
+```
 
 把文件提交到仓库
 
+```
  $ git commit -m "commit message"
+```
 
 在团队合作中 , 每人每次 commit 应当注意一定的规范
 
@@ -86,7 +96,9 @@ git的基本使用
 
 **commit message 格式**
 
+```
  <type>(<scope>): <subject>
+```
 
 说明:
 
@@ -141,37 +153,57 @@ subject 是 commit 目的的简短描述，不超过 50 个字符。
 
 查看历史提交记录
 
+```
 $ git log# 格式化日志输出$ git log --pretty=oneline
+```
 
 回退上一个版本
 
+```
 $ git reset --hard HEAD^
+```
 
 回退指定版本, 版本号可以通过 git log 查询到 或者 回退日志
 
+```
 $ git reset --hard 版本号
+```
 
 查看回退日志
 
+```
 $ git reflog
+```
+
+
 
 # 删除文件
 
 工作区中删除 , 即自己的电脑目录中
 
+```
 $ rm file
+```
 
 从版本库中删除文件
 
+```
 $ git rm file
+```
 
 提交更新
 
+```
 $ git commit -m "remove file"
+```
 
 删错了,版本库内还有
 
+```
 $ git checkout -- file
+```
+
+
 
 # 分支
 
@@ -204,29 +236,43 @@ $ git checkout -- file
 
 查看分支 , 当前分支 即 HEAD 指向的分支名前会有一个 `*`号
 
+```
 $ git branch
+```
 
 创建分支
 
+```
 $ git checkout -b 分支名称
+```
 
 切换分支 , 即切换 HEAD
 
+```
 $ git checkout 要切换的分支名# 或者$ git switch 要切换的分支名
+```
 
 创建并切换到新的分支
 
+```
 $ git checkout -b 分支名称$ git switch -c 分支名称
+```
 
 合并分支
 
+```
 $ git merge 被合并的分支名
+```
 
 `git merge`命令用于合并指定分支到当前分支。
 
 删除分支
 
+```
 $ git branch -d 分支名称
+```
+
+
 
 ## 冲突
 
@@ -254,11 +300,15 @@ Git 用`<<<<<<<`，`=======`，`>>>>>>>`标记出不同分支的内容，例如
 
 将内容修改 , 再次提交
 
+```
 $ git add readme.md$ git commit -m "conflict fixed"
+```
 
 用带参数的`git log`也可以看到分支的合并情况：
 
+```
 $ git log --graph --pretty=oneline --abbrev-commit
+```
 
 当 Git 无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
 
@@ -276,17 +326,37 @@ gitee (阿里系 ,稳定) , github (建议 vpn) ,coding (代替品) , BitBucket 
 
 当在本地存在一个 git 仓库时
 
+```
 git remote add origin 新仓库的地址# 提交到远程git push -u origin master
+```
 
 当本地不存在 git 仓库时,创建一个本地仓库与远程仓库关联
 
-mkdir NewRepositorycd NewRepositorygit initgit remote add origin 新仓库的地址# 提交到远程git push -u origin master
+```
+mkdir NewRepository
+
+cd NewRepository
+
+git init
+
+git remote add origin 新仓库的地址# 
+```
+
+提交到远程
+
+```
+git push -u origin master
+```
 
 由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git 不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
 第一次提交成功后, 每次提交都可以使用
 
+```
 $ git push origin master
+```
+
+
 
 ## 删除远程库
 
@@ -294,7 +364,9 @@ $ git push origin master
 
 如果添加的时候地址写错了，或者就是想删除远程库，可以用`git remote rm <name>`命令。使用前，建议先用`git remote -v`查看远程库信息,然后，根据名字删除，比如删除`origin`：
 
+```
 $ git remote rm 仓库名
+```
 
 此处的“删除”其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。远程库本身并没有任何改动。要真正删除远程库，需要登录到 GitHub，在后台页面找到删除按钮再删除。
 
@@ -302,15 +374,21 @@ $ git remote rm 仓库名
 
 此命令将克隆整个仓库
 
+```
 $ git clone 远程仓库地址
+```
 
 克隆远程仓库的时候，自定义本地仓库的名字，你可以通过额外的参数指定新的目录名：
 
+```
 $ git clone 远程仓库地址 mylibgit
+```
 
 克隆指定单个分支
 
+```
 git clone -b +分支名+远程仓库地址git clone -b <branch-name> <remote-url>
+```
 
 
 
@@ -324,8 +402,6 @@ git clone -b +分支名+远程仓库地址git clone -b <branch-name> <remote-url
 git config --global https.proxy
 git config --global --unset https.proxy
 ```
-
-
 
 `OpenSSL SSL_read: Connection was reset, errno 10054`
 

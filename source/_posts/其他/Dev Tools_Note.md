@@ -7,7 +7,7 @@ tags:
   - 开发工具
   - debug
 categories:
-  - 开发
+  - 其他
 ---
 
 Chrome 调试工具的基本使用
