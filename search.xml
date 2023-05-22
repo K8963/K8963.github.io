@@ -470,258 +470,6 @@ app<span class="token punctuation">.</span><span class="token function">listen</
       </tags>
   </entry>
   <entry>
-    <title>模块化与包</title>
-    <url>/2021/07/18/%E5%90%8E%E7%AB%AF/Node.js/%E5%9F%BA%E7%A1%80/2.%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8E%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>概念：模块化是指解决一个复杂问题时，自顶向下逐层把系统划分成若干模块的过程。对于整个系统来说，模块是可组合、分解和更换的单元。</p>
-<p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。</p>
-<p>把代码进行模块化拆分的好处:</p>
-<ol>
-<li>提高了代码的复用性</li>
-<li>提高了代码的可维护性</li>
-<li>可以实现按需加载</li>
-</ol>
-<p>模块化规范：</p>
-<p>模块化规范就是对代码进行模块化的拆分和组合时，需要遵守的规则</p>
-<h1 id="Nodejs中的模块化"><a href="#Nodejs中的模块化" class="headerlink" title="Nodejs中的模块化"></a>Nodejs中的模块化</h1><p>Node.js 中根据模块来源的不同，将模块分为了3大类，分别是:</p>
-<ul>
-<li><strong>内置模块</strong>(内置模块是由Node.js 官方提供的，例如fs、path、http等)<br>心</li>
-<li><strong>自定义模块</strong>(用户创建的每个.js文件，都是自定义模块)</li>
-<li><strong>第三方模块</strong>(由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载)</li>
-</ul>
-<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的<code>require()</code>方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用。</p>
-<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>和函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域。</p>
-<h2 id="module对象"><a href="#module对象" class="headerlink" title="module对象"></a>module对象</h2><p>可向外共享模块作用域中的成员</p>
-<p>在每个.js自定义模块中都有一个module对象，它里面存储了和当前模块有关的信息</p>
-<p><strong>module.exports</strong></p>
-<p>在自定义模块中，可以使用module.exports 对象，将模块内的成员共享出去，供外界使用。</p>
-<p>自定义模块</p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token string">"zs"</span><span class="token punctuation">;</span>
-<span class="token keyword">function</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"hello,my name is "</span> <span class="token operator">+</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  name<span class="token punctuation">,</span>
-  sayHello<span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-</code></pre>
-
-<p>使用自定义模块</p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> m <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./module.exports"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-
-<h2 id="exports-对象"><a href="#exports-对象" class="headerlink" title="exports 对象"></a>exports 对象</h2><p>由于<code>module.exports</code>单词写起来比较复杂，为了简化向外共享成员的代码，Node提供了<code>exports</code>对象。默认情况下，<code>exports</code>和<code>module.exports</code> 指向同一个对象。最终共享的结果，还是以<code>module.exports</code> 指向的对象为准。</p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">===</span> exports<span class="token punctuation">;</span> <span class="token comment">// true</span></code></pre>
-
-
-
-<h1 id="Common-JS"><a href="#Common-JS" class="headerlink" title="Common JS"></a>Common JS</h1><p>Node.,js 遵循了CommonJS模块化规范，CommonJS规定了模块的特性和各模块之间如何相互依赖。</p>
-<p>CommonJS规定:</p>
-<ul>
-<li>每个模块内部，module变量代表当前模块。</li>
-<li>module变量是一个对象，它的exports属性(即module.exports）是对外的接口。</li>
-<li>加载某个模块，其实是加载该模块的module.exports属性。</li>
-<li>require()方法用于加载模块。</li>
-</ul>
-<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><p>在Nodejs中<strong>第三方模块</strong>又叫做包</p>
-<p>包是基于内置模块封装出来的，提供了更高级、更方便的APl，极大的提高了开发效率。</p>
-<h2 id="包的来源"><a href="#包的来源" class="headerlink" title="包的来源"></a>包的来源</h2><p>包是由第三方个人或者团队开发出来的，免费供所有人使用</p>
-<h2 id="npm包使用"><a href="#npm包使用" class="headerlink" title="npm包使用"></a>npm包使用</h2><h3 id="格式化时间-传统做法"><a href="#格式化时间-传统做法" class="headerlink" title="格式化时间 - 传统做法"></a>格式化时间 - 传统做法</h3><ol>
-<li>创建格式化时间的自定义模块</li>
-<li>定义格式化时间的方法</li>
-<li>创建补零函数</li>
-<li>从自定义模块中导出格式化时间的函数</li>
-<li>导入格式化时间的自定义模块</li>
-<li>调用格式化时间的函数</li>
-</ol>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// dateFormat</span>
-<span class="token comment">// 定义时间格式化</span>
-<span class="token keyword">function</span> <span class="token function">dateFormat</span><span class="token punctuation">(</span><span class="token parameter">dtStr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">const</span> dt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>dtStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">const</span> y <span class="token operator">=</span> dt<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> m <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">const</span> hh <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> mm <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> ss <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>y<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>m<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>d<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>hh<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>mm<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>ss<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 补零函数</span>
-<span class="token keyword">function</span> <span class="token function">padZero</span><span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> n <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> n <span class="token operator">:</span> <span class="token string">"0"</span> <span class="token operator">+</span> n<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  dateFormat<span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
-
-<p>使用<code>dateFormat</code></p>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token constant">TIME</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./dateFormat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> dt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// console.log(dt);</span>
-
-<span class="token keyword">const</span> newDt <span class="token operator">=</span> <span class="token constant">TIME</span><span class="token punctuation">.</span><span class="token function">dateFormat</span><span class="token punctuation">(</span>dt<span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newDt<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 2022-01-24</span></code></pre>
-
-<h3 id="使用第三方包进行格式化"><a href="#使用第三方包进行格式化" class="headerlink" title="使用第三方包进行格式化"></a>使用第三方包进行格式化</h3><ol>
-<li>安装格式化时间包 - <code>monent</code></li>
-<li>使用require()导入格式化时间的包</li>
-<li>参考moment的<a href="http://momentjs.cn/">官方API文档</a>对时间进行格式化</li>
-</ol>
-<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> moment <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"moment"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> dt <span class="token operator">=</span> <span class="token function">moment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"YYYY-MM-DD HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dt<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-
-
-
-<h2 id="npm包注意"><a href="#npm包注意" class="headerlink" title="npm包注意"></a>npm包注意</h2><p>初次装包完成后，在项目文件夹下多一个叫做<code>node_modules</code>的文件夹和 <code>package-lock.json</code>的配置文件。</p>
-<blockquote>
-<p><code>node_modules</code>文件夹用来存放所有已安装到项目中的包。require()导入第三方包时，就是从这个目录中查找并加载包。</p>
-<p><code>package-lock.json</code>配置文件用来记录node modules 目录下的每一个包的下载信息，例效包的名字、版本号、下载地址等。</p>
-</blockquote>
-<p>默认情况下，使用npm install 命令安装包的时候，会自动安装最新版本的包。如果需要安装指定版本的包，可以在包名之后，通过@符号指定具体的版本，例如:</p>
-<pre class="language-none"><code class="language-none">npm i moment@2.22.2</code></pre>
-
-
-
-<p>包的语义化版本规范</p>
-<p>包的版本号是以“点分十进制”形式进行定义的，总共有三位数字，例如2.24.0其中每一位数字所代表的的含义如下:</p>
-<ul>
-<li>第1位数字:大版本</li>
-<li>第2位数字:功能版本</li>
-<li>第3位数字:Bug修复版本</li>
-</ul>
-<h2 id="包管理配置文件"><a href="#包管理配置文件" class="headerlink" title="包管理配置文件"></a>包管理配置文件</h2><p>npm 规定，在项目根目录中，必须提供一个叫做 <code>package.json</code>的包管理配置文件。用来记录与项目有关的一些配置信息。例如:</p>
-<ul>
-<li>项目的名称、版本号、描述等</li>
-<li>项目中使用的包</li>
-<li>对包进行分类：开发和部署</li>
-</ul>
-<p>创建 <code>package.json</code>的包管理配置文件</p>
-<pre class="language-none"><code class="language-none">npm init -y</code></pre>
-
-<h3 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h3><p>package.json文件中，有一个dependencies节点，专门用来记录您使用npm install命令安装了哪些包。</p>
-<h3 id="devDependcies"><a href="#devDependcies" class="headerlink" title="devDependcies"></a>devDependcies</h3><p>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到<code>devDependencies</code>节点中。</p>
-<pre class="language-none"><code class="language-none">npm i moment -D
-# or
-npm i moment --save-dev</code></pre>
-
-<p>与之对应的，如果某些包在开发和项目上线之后都需要用到，则建议把这些包记录到<code>dependencies</code> 节点中。</p>
-<p>查看npm各项配置</p>
-<pre class="language-none"><code class="language-none">npm config get</code></pre>
-
-<p>查看当前下包的镜像源：</p>
-<pre class="language-none"><code class="language-none">npm config get registry</code></pre>
-
-<h2 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h2><p>为了更方便的切换下包的镜像源，我们可以安装nrm这个小工具，利用nrm提供的终端命令，可以快速查看和切换下包的镜像源。</p>
-<pre class="language-none"><code class="language-none"># #通过npm包管理器，将nrm安装为全局可用的工具
-npm i nrm -g
-# #查看所有可用的镜像源nrm ls
-nrm ls
-# #将下包的镜像源切换为taobao镜像
-nrm use taobao</code></pre>
-
-
-
-<h2 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h2><p>项目包又分为两类，分别是:</p>
-<ul>
-<li><p>开发依赖包</p>
-<p>被记录到<code>devDependencies</code>节点中的包，只在开发期间会用到</p>
-<pre class="language-none"><code class="language-none">npm i 包名 -D</code></pre>
-
-
-</li>
-<li><p>核心依赖包</p>
-<p>被记录到<code>dependencies</code>节点中的包，在开发期间和项目上线之后都会用到</p>
-<pre class="language-none"><code class="language-none">npm i 包名 []</code></pre></li>
-</ul>
-<blockquote>
-<p>全局包 -g</p>
-<p><code>--save</code> &#x3D; <code>-S</code></p>
-<p>项目（运行时、发布到生产环境时）依赖 , devDependencies</p>
-<p><code>--save-dev</code> &#x3D; <code>-D</code></p>
-<p>工程构建（开发时、“打包”时）依赖 , dependencies</p>
-</blockquote>
-<h2 id="规范的包文件"><a href="#规范的包文件" class="headerlink" title="规范的包文件"></a>规范的包文件</h2><ol>
-<li>包必须以单独的目录而存在</li>
-<li>包的顶级目录下要必须包含 package.json这个包管理配置文件</li>
-<li>package.json中必须包含name，version，main这三个属性，分别代表包的名字、版本号、包的入口。</li>
-</ol>
-<h1 id="开发自己的包"><a href="#开发自己的包" class="headerlink" title="开发自己的包"></a>开发自己的包</h1><p>尝试开发自己的包：</p>
-<ol>
-<li>格式化日期</li>
-<li>转义HTML中的特殊字符</li>
-<li>还原HTML中的特殊字符</li>
-</ol>
-<h2 id="初始化包基本结构"><a href="#初始化包基本结构" class="headerlink" title="初始化包基本结构"></a>初始化包基本结构</h2><ol>
-<li><p>新建8963-tools 文件夹，作为包的根目录</p>
-</li>
-<li><p>在8963-tools文件夹中，新建如下三个文件:</p>
-<ul>
-<li>package.json(包管理配置文件)</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>index.js(包的入口文件)</li>
-</ul>
-<ol start="3">
-<li>README.md(包的说明文档)</li>
-</ol>
-<h2 id="将包发布到npm"><a href="#将包发布到npm" class="headerlink" title="将包发布到npm"></a>将包发布到npm</h2><p>将终端切换到包的根目录之后，运行npm publish 命令，即可将包发布到npm上(注意:包名不能雷同)。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070835908.png" loading="lazy"></p>
-<p>删除已经发布的包</p>
-<pre class="language-none"><code class="language-none">npm unpublish 包名 --force</code></pre>
-
-<p>注意：</p>
-<ul>
-<li>npm unpublish命令只能删除72小时以内发布的包</li>
-<li>npm unpublish 删除的包,在24小时内不允许重复发布</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070836403.png" loading="lazy"></p>
-<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><p>模块在第一次加载后会被缓存。这也意味着多次调用require)不会导致模块的代码被执行多次。</p>
-<p>注意:不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
-<h2 id="内置模块加载机制"><a href="#内置模块加载机制" class="headerlink" title="内置模块加载机制"></a>内置模块加载机制</h2><p>内置模块是由Node.js 官方提供的模块，内置模块的加载优先级最高。</p>
-<p>例如，require(‘fs’)始终返回内置的fs模块，即使在node modules目录下有名字相同的包也叫做fs。</p>
-<h2 id="自定义模块加载机制"><a href="#自定义模块加载机制" class="headerlink" title="自定义模块加载机制"></a>自定义模块加载机制</h2><p>使用require()加载自定义模块时，必须指定以<code>./</code>或<code>../</code>开头的路径标识符。</p>
-<p>在加载自定义模块时，如果没有指定<code>./</code>或<code>../</code>这样的路径标识符，则node会把它当作内置模块或第三方模块进行加载。</p>
-<p>同时，在使用require()导入自定义模块时，如果省略了文件的扩展名，则Node.js 会按顺序分别尝试加载以下的文件:</p>
-<ol>
-<li><p>按照确切的文件名进行加载</p>
-</li>
-<li><p>补全<code>.js</code>扩展名进行加载</p>
-</li>
-<li><p>补全<code>.json</code>扩展名进行加载</p>
-</li>
-<li><p>补全<code>.node</code>扩展名进行加载</p>
-</li>
-</ol>
-<h2 id="第三方模块加载机制"><a href="#第三方模块加载机制" class="headerlink" title="第三方模块加载机制"></a>第三方模块加载机制</h2><p>如果传递给<code>require()</code>的模块标识符不是一个内置模块，也没有以<code>./</code>或‘<code>../</code>开头，则Nodejs 会从当前模块的父目录开始，尝试从<code>/node_modules</code>文件夹中加载第三方模块。</p>
-<p>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。</p>
-<h2 id="把目录当作模块加载"><a href="#把目录当作模块加载" class="headerlink" title="把目录当作模块加载"></a>把目录当作模块加载</h2><p>当把目录作为模块标识符，传递给require()进行加载的时候，有三种加载方式:</p>
-<ol>
-<li>在被加载的目录下查找一个叫做package.json的文件，并寻找 main属性，作为require()加载的入口</li>
-<li>如果目录里没有package.json文件，或者main入口不存在或无法解析，则Node,js,将会试图加载目录下的 indexjs文件。</li>
-<li>如果以上两步都失败了，则Node.,js 会在终端打印错误消息，报告模块的缺失;Error: Cannot find module ‘xo’</li>
-</ol>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>koa2基本使用</title>
     <url>/2022/03/12/%E5%90%8E%E7%AB%AF/Node.js/%E5%9F%BA%E7%A1%80/4.koa2/</url>
     <content><![CDATA[<h1 id="安装-Koa2"><a href="#安装-Koa2" class="headerlink" title="安装 Koa2"></a>安装 Koa2</h1><pre class="language-none"><code class="language-none">npm init -y
@@ -1096,6 +844,258 @@ login<span class="token punctuation">.</span><span class="token function">post</
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> login</code></pre>
 
 <p>至此登录注册完成</p>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模块化与包</title>
+    <url>/2021/07/18/%E5%90%8E%E7%AB%AF/Node.js/%E5%9F%BA%E7%A1%80/2.%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8E%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>概念：模块化是指解决一个复杂问题时，自顶向下逐层把系统划分成若干模块的过程。对于整个系统来说，模块是可组合、分解和更换的单元。</p>
+<p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。</p>
+<p>把代码进行模块化拆分的好处:</p>
+<ol>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载</li>
+</ol>
+<p>模块化规范：</p>
+<p>模块化规范就是对代码进行模块化的拆分和组合时，需要遵守的规则</p>
+<h1 id="Nodejs中的模块化"><a href="#Nodejs中的模块化" class="headerlink" title="Nodejs中的模块化"></a>Nodejs中的模块化</h1><p>Node.js 中根据模块来源的不同，将模块分为了3大类，分别是:</p>
+<ul>
+<li><strong>内置模块</strong>(内置模块是由Node.js 官方提供的，例如fs、path、http等)<br>心</li>
+<li><strong>自定义模块</strong>(用户创建的每个.js文件，都是自定义模块)</li>
+<li><strong>第三方模块</strong>(由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载)</li>
+</ul>
+<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的<code>require()</code>方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用。</p>
+<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>和函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域。</p>
+<h2 id="module对象"><a href="#module对象" class="headerlink" title="module对象"></a>module对象</h2><p>可向外共享模块作用域中的成员</p>
+<p>在每个.js自定义模块中都有一个module对象，它里面存储了和当前模块有关的信息</p>
+<p><strong>module.exports</strong></p>
+<p>在自定义模块中，可以使用module.exports 对象，将模块内的成员共享出去，供外界使用。</p>
+<p>自定义模块</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> name <span class="token operator">=</span> <span class="token string">"zs"</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"hello,my name is "</span> <span class="token operator">+</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  name<span class="token punctuation">,</span>
+  sayHello<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+</code></pre>
+
+<p>使用自定义模块</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> m <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./module.exports"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<h2 id="exports-对象"><a href="#exports-对象" class="headerlink" title="exports 对象"></a>exports 对象</h2><p>由于<code>module.exports</code>单词写起来比较复杂，为了简化向外共享成员的代码，Node提供了<code>exports</code>对象。默认情况下，<code>exports</code>和<code>module.exports</code> 指向同一个对象。最终共享的结果，还是以<code>module.exports</code> 指向的对象为准。</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">===</span> exports<span class="token punctuation">;</span> <span class="token comment">// true</span></code></pre>
+
+
+
+<h1 id="Common-JS"><a href="#Common-JS" class="headerlink" title="Common JS"></a>Common JS</h1><p>Node.,js 遵循了CommonJS模块化规范，CommonJS规定了模块的特性和各模块之间如何相互依赖。</p>
+<p>CommonJS规定:</p>
+<ul>
+<li>每个模块内部，module变量代表当前模块。</li>
+<li>module变量是一个对象，它的exports属性(即module.exports）是对外的接口。</li>
+<li>加载某个模块，其实是加载该模块的module.exports属性。</li>
+<li>require()方法用于加载模块。</li>
+</ul>
+<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><p>在Nodejs中<strong>第三方模块</strong>又叫做包</p>
+<p>包是基于内置模块封装出来的，提供了更高级、更方便的APl，极大的提高了开发效率。</p>
+<h2 id="包的来源"><a href="#包的来源" class="headerlink" title="包的来源"></a>包的来源</h2><p>包是由第三方个人或者团队开发出来的，免费供所有人使用</p>
+<h2 id="npm包使用"><a href="#npm包使用" class="headerlink" title="npm包使用"></a>npm包使用</h2><h3 id="格式化时间-传统做法"><a href="#格式化时间-传统做法" class="headerlink" title="格式化时间 - 传统做法"></a>格式化时间 - 传统做法</h3><ol>
+<li>创建格式化时间的自定义模块</li>
+<li>定义格式化时间的方法</li>
+<li>创建补零函数</li>
+<li>从自定义模块中导出格式化时间的函数</li>
+<li>导入格式化时间的自定义模块</li>
+<li>调用格式化时间的函数</li>
+</ol>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// dateFormat</span>
+<span class="token comment">// 定义时间格式化</span>
+<span class="token keyword">function</span> <span class="token function">dateFormat</span><span class="token punctuation">(</span><span class="token parameter">dtStr</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> dt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>dtStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> y <span class="token operator">=</span> dt<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> m <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> d <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> hh <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> mm <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> ss <span class="token operator">=</span> <span class="token function">padZero</span><span class="token punctuation">(</span>dt<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>y<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>m<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>d<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>hh<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>mm<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>ss<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 补零函数</span>
+<span class="token keyword">function</span> <span class="token function">padZero</span><span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> n <span class="token operator">></span> <span class="token number">9</span> <span class="token operator">?</span> n <span class="token operator">:</span> <span class="token string">"0"</span> <span class="token operator">+</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  dateFormat<span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>使用<code>dateFormat</code></p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token constant">TIME</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"./dateFormat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> dt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// console.log(dt);</span>
+
+<span class="token keyword">const</span> newDt <span class="token operator">=</span> <span class="token constant">TIME</span><span class="token punctuation">.</span><span class="token function">dateFormat</span><span class="token punctuation">(</span>dt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newDt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 2022-01-24</span></code></pre>
+
+<h3 id="使用第三方包进行格式化"><a href="#使用第三方包进行格式化" class="headerlink" title="使用第三方包进行格式化"></a>使用第三方包进行格式化</h3><ol>
+<li>安装格式化时间包 - <code>monent</code></li>
+<li>使用require()导入格式化时间的包</li>
+<li>参考moment的<a href="http://momentjs.cn/">官方API文档</a>对时间进行格式化</li>
+</ol>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> moment <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"moment"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> dt <span class="token operator">=</span> <span class="token function">moment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"YYYY-MM-DD HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dt<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+
+
+<h2 id="npm包注意"><a href="#npm包注意" class="headerlink" title="npm包注意"></a>npm包注意</h2><p>初次装包完成后，在项目文件夹下多一个叫做<code>node_modules</code>的文件夹和 <code>package-lock.json</code>的配置文件。</p>
+<blockquote>
+<p><code>node_modules</code>文件夹用来存放所有已安装到项目中的包。require()导入第三方包时，就是从这个目录中查找并加载包。</p>
+<p><code>package-lock.json</code>配置文件用来记录node modules 目录下的每一个包的下载信息，例效包的名字、版本号、下载地址等。</p>
+</blockquote>
+<p>默认情况下，使用npm install 命令安装包的时候，会自动安装最新版本的包。如果需要安装指定版本的包，可以在包名之后，通过@符号指定具体的版本，例如:</p>
+<pre class="language-none"><code class="language-none">npm i moment@2.22.2</code></pre>
+
+
+
+<p>包的语义化版本规范</p>
+<p>包的版本号是以“点分十进制”形式进行定义的，总共有三位数字，例如2.24.0其中每一位数字所代表的的含义如下:</p>
+<ul>
+<li>第1位数字:大版本</li>
+<li>第2位数字:功能版本</li>
+<li>第3位数字:Bug修复版本</li>
+</ul>
+<h2 id="包管理配置文件"><a href="#包管理配置文件" class="headerlink" title="包管理配置文件"></a>包管理配置文件</h2><p>npm 规定，在项目根目录中，必须提供一个叫做 <code>package.json</code>的包管理配置文件。用来记录与项目有关的一些配置信息。例如:</p>
+<ul>
+<li>项目的名称、版本号、描述等</li>
+<li>项目中使用的包</li>
+<li>对包进行分类：开发和部署</li>
+</ul>
+<p>创建 <code>package.json</code>的包管理配置文件</p>
+<pre class="language-none"><code class="language-none">npm init -y</code></pre>
+
+<h3 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h3><p>package.json文件中，有一个dependencies节点，专门用来记录您使用npm install命令安装了哪些包。</p>
+<h3 id="devDependcies"><a href="#devDependcies" class="headerlink" title="devDependcies"></a>devDependcies</h3><p>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到<code>devDependencies</code>节点中。</p>
+<pre class="language-none"><code class="language-none">npm i moment -D
+# or
+npm i moment --save-dev</code></pre>
+
+<p>与之对应的，如果某些包在开发和项目上线之后都需要用到，则建议把这些包记录到<code>dependencies</code> 节点中。</p>
+<p>查看npm各项配置</p>
+<pre class="language-none"><code class="language-none">npm config get</code></pre>
+
+<p>查看当前下包的镜像源：</p>
+<pre class="language-none"><code class="language-none">npm config get registry</code></pre>
+
+<h2 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h2><p>为了更方便的切换下包的镜像源，我们可以安装nrm这个小工具，利用nrm提供的终端命令，可以快速查看和切换下包的镜像源。</p>
+<pre class="language-none"><code class="language-none"># #通过npm包管理器，将nrm安装为全局可用的工具
+npm i nrm -g
+# #查看所有可用的镜像源nrm ls
+nrm ls
+# #将下包的镜像源切换为taobao镜像
+nrm use taobao</code></pre>
+
+
+
+<h2 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h2><p>项目包又分为两类，分别是:</p>
+<ul>
+<li><p>开发依赖包</p>
+<p>被记录到<code>devDependencies</code>节点中的包，只在开发期间会用到</p>
+<pre class="language-none"><code class="language-none">npm i 包名 -D</code></pre>
+
+
+</li>
+<li><p>核心依赖包</p>
+<p>被记录到<code>dependencies</code>节点中的包，在开发期间和项目上线之后都会用到</p>
+<pre class="language-none"><code class="language-none">npm i 包名 []</code></pre></li>
+</ul>
+<blockquote>
+<p>全局包 -g</p>
+<p><code>--save</code> &#x3D; <code>-S</code></p>
+<p>项目（运行时、发布到生产环境时）依赖 , devDependencies</p>
+<p><code>--save-dev</code> &#x3D; <code>-D</code></p>
+<p>工程构建（开发时、“打包”时）依赖 , dependencies</p>
+</blockquote>
+<h2 id="规范的包文件"><a href="#规范的包文件" class="headerlink" title="规范的包文件"></a>规范的包文件</h2><ol>
+<li>包必须以单独的目录而存在</li>
+<li>包的顶级目录下要必须包含 package.json这个包管理配置文件</li>
+<li>package.json中必须包含name，version，main这三个属性，分别代表包的名字、版本号、包的入口。</li>
+</ol>
+<h1 id="开发自己的包"><a href="#开发自己的包" class="headerlink" title="开发自己的包"></a>开发自己的包</h1><p>尝试开发自己的包：</p>
+<ol>
+<li>格式化日期</li>
+<li>转义HTML中的特殊字符</li>
+<li>还原HTML中的特殊字符</li>
+</ol>
+<h2 id="初始化包基本结构"><a href="#初始化包基本结构" class="headerlink" title="初始化包基本结构"></a>初始化包基本结构</h2><ol>
+<li><p>新建8963-tools 文件夹，作为包的根目录</p>
+</li>
+<li><p>在8963-tools文件夹中，新建如下三个文件:</p>
+<ul>
+<li>package.json(包管理配置文件)</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>index.js(包的入口文件)</li>
+</ul>
+<ol start="3">
+<li>README.md(包的说明文档)</li>
+</ol>
+<h2 id="将包发布到npm"><a href="#将包发布到npm" class="headerlink" title="将包发布到npm"></a>将包发布到npm</h2><p>将终端切换到包的根目录之后，运行npm publish 命令，即可将包发布到npm上(注意:包名不能雷同)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070835908.png" loading="lazy"></p>
+<p>删除已经发布的包</p>
+<pre class="language-none"><code class="language-none">npm unpublish 包名 --force</code></pre>
+
+<p>注意：</p>
+<ul>
+<li>npm unpublish命令只能删除72小时以内发布的包</li>
+<li>npm unpublish 删除的包,在24小时内不允许重复发布</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202209070836403.png" loading="lazy"></p>
+<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><p>模块在第一次加载后会被缓存。这也意味着多次调用require)不会导致模块的代码被执行多次。</p>
+<p>注意:不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
+<h2 id="内置模块加载机制"><a href="#内置模块加载机制" class="headerlink" title="内置模块加载机制"></a>内置模块加载机制</h2><p>内置模块是由Node.js 官方提供的模块，内置模块的加载优先级最高。</p>
+<p>例如，require(‘fs’)始终返回内置的fs模块，即使在node modules目录下有名字相同的包也叫做fs。</p>
+<h2 id="自定义模块加载机制"><a href="#自定义模块加载机制" class="headerlink" title="自定义模块加载机制"></a>自定义模块加载机制</h2><p>使用require()加载自定义模块时，必须指定以<code>./</code>或<code>../</code>开头的路径标识符。</p>
+<p>在加载自定义模块时，如果没有指定<code>./</code>或<code>../</code>这样的路径标识符，则node会把它当作内置模块或第三方模块进行加载。</p>
+<p>同时，在使用require()导入自定义模块时，如果省略了文件的扩展名，则Node.js 会按顺序分别尝试加载以下的文件:</p>
+<ol>
+<li><p>按照确切的文件名进行加载</p>
+</li>
+<li><p>补全<code>.js</code>扩展名进行加载</p>
+</li>
+<li><p>补全<code>.json</code>扩展名进行加载</p>
+</li>
+<li><p>补全<code>.node</code>扩展名进行加载</p>
+</li>
+</ol>
+<h2 id="第三方模块加载机制"><a href="#第三方模块加载机制" class="headerlink" title="第三方模块加载机制"></a>第三方模块加载机制</h2><p>如果传递给<code>require()</code>的模块标识符不是一个内置模块，也没有以<code>./</code>或‘<code>../</code>开头，则Nodejs 会从当前模块的父目录开始，尝试从<code>/node_modules</code>文件夹中加载第三方模块。</p>
+<p>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。</p>
+<h2 id="把目录当作模块加载"><a href="#把目录当作模块加载" class="headerlink" title="把目录当作模块加载"></a>把目录当作模块加载</h2><p>当把目录作为模块标识符，传递给require()进行加载的时候，有三种加载方式:</p>
+<ol>
+<li>在被加载的目录下查找一个叫做package.json的文件，并寻找 main属性，作为require()加载的入口</li>
+<li>如果目录里没有package.json文件，或者main入口不存在或无法解析，则Node,js,将会试图加载目录下的 indexjs文件。</li>
+<li>如果以上两步都失败了，则Node.,js 会在终端打印错误消息，报告模块的缺失;Error: Cannot find module ‘xo’</li>
+</ol>
 ]]></content>
       <categories>
         <category>后端</category>
