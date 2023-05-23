@@ -1,8 +1,8 @@
 ---
-title:vim使用
-date:2021-04-10 12:10:00
-comments:false
-author:8963
+title: vim使用
+date: 2021-04-10 12:10:00
+comments: false
+author: 8963
 tags:
   - vim
   - 编辑器

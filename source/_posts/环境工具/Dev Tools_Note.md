@@ -1,8 +1,8 @@
 ---
-title:Chrome 调试工具
-date:2021-04-10 12:10:00
-comments:false
-author:8963
+title: Chrome 调试工具
+date: 2021-04-10 12:10:00
+comments: false
+author: 8963
 tags:
   - 开发工具
   - debug

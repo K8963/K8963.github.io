@@ -1,8 +1,8 @@
 ---
-title:vscode
-date:2022-09-18 23:10:00
-comments:false
-author:8963
+title: vscode
+date: 2022-09-18 23:10:00
+comments: false
+author: 8963
 tags:
   - vscode
   - 编辑器

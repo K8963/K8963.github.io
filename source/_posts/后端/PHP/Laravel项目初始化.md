@@ -1,7 +1,8 @@
 ---
-title:Laravel-项目初始化
-date:2020-08-29 14:52:39
-comments:false 
+title: Laravel项目初始化
+date: 2020-03-29 21:52:39
+comments: false
+author: 8963
 tags:
   - Laravel
   - PHP

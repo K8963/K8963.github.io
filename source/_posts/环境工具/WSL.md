@@ -1,8 +1,8 @@
 ---
-title:WSL
-date:2023-05-18 01:10:00
-comments:false
-author:8963
+title: WSL
+date: 2023-05-18 01:10:00
+comments: false
+author: 8963
 tags:
   - WSL
   - 开发环境

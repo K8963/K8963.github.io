@@ -1,8 +1,8 @@
 ---
-title:nodejs+ffmpeg视频转码
-date:2020-09-18 21:52:39
-comments:false
-author:8963
+title: nodejs+ffmpeg视频转码
+date: 2020-09-18 21:52:39
+comments: false
+author: 8963
 tags:
   - ffmpeg
   - Node.js

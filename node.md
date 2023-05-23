@@ -15,10 +15,10 @@ hexo generate 或 hexo g
 启动服务器
 
 ```
-hexo server` 启动服务器，ctrl+c 结束，默认地址为：`http://localhost:4000/
+hexo server` 
 ```
 
-
+启动服务器，ctrl+c 结束，默认地址为：`http://localhost:4000/
 
 部署网站
 hexo deploy 或hexo d

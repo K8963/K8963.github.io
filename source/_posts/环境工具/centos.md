@@ -1,8 +1,8 @@
 ---
-title:CentOS
-date:2022-01-18 23:10:00
-comments:false
-author:8963
+title: CentOS
+date: 2022-01-18 23:10:00
+comments: false
+author: 8963
 tags:
   - Linux
 categories:

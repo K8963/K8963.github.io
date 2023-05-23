@@ -1,8 +1,8 @@
 ---
-title:mjpegcanvas接入视频
-date:2021-07-09 15:50:00
-comments:false
-author:8963
+title: mjpegcanvas接入视频
+date: 2021-07-09 15:50:00
+comments: false
+author: 8963
 tags:
   - ros
 categories:

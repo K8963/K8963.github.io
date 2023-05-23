@@ -1,7 +1,7 @@
 ---
-title:Vue日常使用
-date:2022-11-14 10:30:00
-comments:false
+title: Vue日常使用
+date: 2022-11-14 10:30:00
+comments: false
 author: 8963
 tags:
   - vue

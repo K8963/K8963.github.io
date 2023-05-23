@@ -1,7 +1,8 @@
 ---
-title:Laravel-缓存操作
-date:2020-08-31 09:20:25
-comments:false 
+title: Laravel缓存操作
+date: 2020-03-12 21:52:39
+comments: false
+author: 8963
 tags:
   - Laravel
   - PHP

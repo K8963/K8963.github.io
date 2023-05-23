@@ -1,8 +1,8 @@
 ---
-title:Laravel + Vue
-date:2022-09-18 23:10:00
-comments:false
-author:8963
+title: Laravel + Vue
+date: 2022-09-18 23:10:00
+comments: false
+author: 8963
 tags:
   - Laravel
   - Vue

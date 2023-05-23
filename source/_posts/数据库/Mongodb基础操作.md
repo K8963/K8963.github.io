@@ -1,8 +1,8 @@
 ---
-title:Mongodb基础操作
-date:2021-01-28 17:53:25
-comments:false
-author:8963
+title: Mongodb基础操作
+date: 2021-01-28 17:53:25
+comments: false
+author: 8963
 tags:
   - Mongodb
 categories:

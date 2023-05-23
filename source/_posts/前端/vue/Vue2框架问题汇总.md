@@ -1,8 +1,8 @@
 ---
-title:Vue2框架问题汇总
-date:2021-05-11 12:59:00
-comments:false
-author:8963
+title: Vue2框架问题汇总
+date: 2021-05-11 12:59:00
+comments: false
+author: 8963
 tags:
   - vue
 categories:

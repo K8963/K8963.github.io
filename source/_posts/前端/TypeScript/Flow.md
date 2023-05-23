@@ -1,8 +1,8 @@
 ---
-title:TypeScript之Flow
-date:2022-03-03 15:10:00
-comments:false
-author:8963
+title: TypeScript之Flow
+date: 2022-03-03 15:10:00
+comments: false
+author: 8963
 tags:
   - TypeScript
 categories:

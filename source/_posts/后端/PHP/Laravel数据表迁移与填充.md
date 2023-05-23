@@ -1,7 +1,8 @@
 ---
-title:Laravel-数据表迁移与填充
-date:2020-09-7 11:02:25
-comments:false 
+title: Laravel-数据表迁移与填充
+date: 2020-09-7 11:02:25
+comments: false
+author: 8963
 tags:
   - Laravel
   - PHP

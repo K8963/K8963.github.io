@@ -1,8 +1,8 @@
 ---
-title:vue3+ts+pinia+element_plus
-date:2022-05-01 12:59:00
-comments:false
-author:8963
+title: vue3+ts+pinia+element_plus
+date: 2022-05-01 12:59:00
+comments: false
+author: 8963
 tags:
   - vue3
   - pinia

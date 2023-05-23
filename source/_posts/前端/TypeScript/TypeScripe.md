@@ -1,8 +1,8 @@
 ---
-title:TypeScript 基础
-date:2022-03-08 10:10:00
-comments:false
-author:8963
+title: TypeScript 基础
+date: 2022-03-08 10:10:00
+comments: false
+author: 8963
 tags:
   - TypeScript
 categories:

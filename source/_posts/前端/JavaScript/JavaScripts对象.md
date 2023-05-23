@@ -1,8 +1,8 @@
 ---
-title:JavaScripts对象
-date:2020-05-30 09:20:25
-comments:false
-author:8963
+title: JavaScripts对象
+date: 2020-05-30 09:20:25
+comments: false
+author: 8963
 tags:
   - JavaScript
 categories:

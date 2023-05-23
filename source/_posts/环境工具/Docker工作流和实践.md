@@ -1,8 +1,8 @@
 ---
-title:Docker工作流和实践
-date:2021-11-18 23:10:00
-comments:false
-author:8963
+title: Docker工作流和实践
+date: 2021-11-18 23:10:00
+comments: false
+author: 8963
 tags:
   - Docker
   - 开发环境

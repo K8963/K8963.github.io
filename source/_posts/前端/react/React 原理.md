@@ -1,7 +1,8 @@
 ---
-title:React 原理
-date:2021-11-07 01:38:00
-comments:false
+title: React 原理
+date: 2021-11-07 01:38:00
+comments: false
+author: 8963
 tags: 
   - JavaScript
   - React

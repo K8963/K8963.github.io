@@ -1,8 +1,8 @@
 ---
-title:Mongodb接口实战小练习
-date:2021-02-03 14:53:25
-comments:false
-author:8963
+title: Mongodb接口实战小练习
+date: 2021-02-03 14:53:25
+comments: false
+author: 8963
 tags:
   - Mongodb
 categories:
