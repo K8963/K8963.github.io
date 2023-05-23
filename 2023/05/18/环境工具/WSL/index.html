@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="8963"><meta name="copyright" content="8963"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>WSL | 8963核电站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/star-markdown-css@0.3.3/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="https://fastly.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="preconnect" href="https://fastly.jsdelivr.net/npm/" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"example.com","root":"/","title":"8963核电站","version":"1.10.6","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.yunyoujun.cn/img/avatar/none.jpg","say":{"api":"/data/sentences.json"},"local_search":{"path":"/search.xml"},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]},"vendors":{"host":"https://fastly.jsdelivr.net/npm/","darken":"https://fastly.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><meta name="description" content="WSL常用命令、安装docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL">
+<meta property="og:url" content="http://example.com/2023/05/18/%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7/WSL/index.html">
+<meta property="og:site_name" content="8963核电站">
+<meta property="og:description" content="WSL常用命令、安装docker">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305231208968.png">
+<meta property="article:published_time" content="2023-05-17T17:10:00.000Z">
+<meta property="article:modified_time" content="2023-05-23T04:34:24.374Z">
+<meta property="article:author" content="8963">
+<meta property="article:tag" content="开发环境">
+<meta property="article:tag" content="WSL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305231208968.png"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script src="https://code.iconify.design/2/2.1.1/iconify.min.js"></script><script>// Define global variable
+IconifyProviders = {
+  // Empty prefix: overwrite default API provider configuration
+  '': {
+    // Use custom API first, use Iconify public API as backup
+    resources: [
+        'https://api.iconify.design',
+    ],
+    // Wait for 1 second before switching API hosts
+    rotate: 1000,
+  },
+};</script><script defer src="https://fastly.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><span class="icon iconify" data-icon="ri:list-ordered"></span></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><span class="icon iconify" data-icon="ri:passport-line"></span></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="8963"><img width="96" loading="lazy" src="/images/avatar.jpg" alt="8963"><span class="site-author-status" title="摆烂到底">😡</span></a><div class="site-author-name"><a href="/about/">8963</a></div><a class="site-name" href="/about/site.html">8963核电站</a><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:home-line"></span></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:archive-line"></span></span><span class="site-state-item-count">58</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:folder-2-line"></span></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:price-tag-line"></span></span><span class="site-state-item-count">38</span></a></div><a class="site-state-item hty-icon-button" href="/about/" title="我"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:aliens-line"></span></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/K8963" title="GitHub" target="_blank" style="color:#181717"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><span class="icon iconify" data-icon="ri:contrast-2-line"></span></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%81%9C%E6%AD%A2"><span class="toc-number">1.1.</span> <span class="toc-text">启动与停止</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.2.</span> <span class="toc-text">查看</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD"><span class="toc-number">1.3.</span> <span class="toc-text">安装与卸载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E4%B8%8E%E5%AF%BC%E5%87%BA"><span class="toc-number">1.4.</span> <span class="toc-text">导入与导出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">1.5.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85docker"><span class="toc-number">2.</span> <span class="toc-text">安装docker</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker-Desktop-for-Windows"><span class="toc-number">3.</span> <span class="toc-text">Docker Desktop for Windows</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://example.com/2023/05/18/%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7/WSL/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="8963"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="8963核电站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">WSL</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:calendar-line"></span></span> <span class="post-meta-icon-text">发表于</span> <time title="创建时间：2023-05-18 01:10:00" itemprop="dateCreated datePublished" datetime="2023-05-18T01:10:00+08:00">2023-05-18</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><span class="icon iconify" data-icon="ri:folder-line"></span></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">环境工具</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">开发环境</span></a><a class="tag-item" href="/tags/WSL/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><span class="icon iconify" data-icon="ri:price-tag-3-line"></span></span><span class="tag-name">WSL</span></a></span></div><div class="post-author"><span class="author-name">8963</span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>WSL常用命令、安装docker</p>
+<span id="more"></span>
+
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="启动与停止"><a href="#启动与停止" class="headerlink" title="启动与停止"></a>启动与停止</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 启动默认 Linux 分发版</span>
+wsl
+ 
+<span class="token comment"># 以指定用户身份运行 Linux 分发版</span>
+wsl <span class="token parameter variable">-u</span> <span class="token operator">&lt;</span>username<span class="token operator">></span>
+ 
+<span class="token comment"># 运行指定的 Linux 分发版</span>
+wsl <span class="token parameter variable">-d</span> <span class="token operator">&lt;</span>Linux分发版名称<span class="token operator">></span>
+ 
+<span class="token comment"># 退出 Linux 分发版</span>
+<span class="token builtin class-name">exit</span>
+ 
+<span class="token comment"># 终止指定的分发</span>
+wsl <span class="token parameter variable">-t</span> <span class="token operator">&lt;</span>Linux分发版名称<span class="token operator">></span>
+ 
+<span class="token comment"># 终止所有运行的分发及 WSL 轻型工具虚拟机</span>
+wsl <span class="token parameter variable">--shutdown</span></code></pre>
+
+
+
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><pre class="language-none"><code class="language-none"># 列出已安装且可供使用的 Linux 分发版
+wsl -l
+ 
+# 列出所有分发，包括当前不可用的分发
+wsl -l --all
+ 
+# 仅列出当前正在运行的分发
+wsl -l --running
+ 
+# 仅显示分发名称
+wsl -l -q
+ 
+# 显示所有分发的详细信息
+wsl -l -v</code></pre>
+
+
+
+<h2 id="安装与卸载"><a href="#安装与卸载" class="headerlink" title="安装与卸载"></a>安装与卸载</h2><pre class="language-none"><code class="language-none"># 列出可安装 Linux 分发版
+wsl -l -o
+ 
+# 安装指定 Linux 分发版
+wsl --install -d &lt;Linux分发版名称&gt;
+ 
+# 卸载 Linux 分发版，卸载后可以重新安装
+wsl --unregister &lt;Linux分发版名称&gt;</code></pre>
+
+
+
+<h2 id="导入与导出"><a href="#导入与导出" class="headerlink" title="导入与导出"></a>导入与导出</h2><pre class="language-none"><code class="language-none"># 导入 Linux 分发版, 可加 --version 指定要用于新分发的版本
+wsl --import &lt;Linux分发版名称&gt; &lt;安装位置&gt; &lt;文件名&gt;
+ 
+# 导出 Linux 分发版，后缀名请以 tar 结尾
+wsl --export &lt;Linux分发版名称&gt; &lt;路径&gt;</code></pre>
+
+
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre class="language-none"><code class="language-none"># 设置默认 Linux 分发版
+wsl -s &lt;Linux分发版名称&gt;
+ 
+# 在不使用默认 Linux Shell 的情况下执行指定的命令
+wsl -e &lt;命令行&gt;
+ 
+# 更改新分发的默认安装版本
+wsl --set-default-version &lt;版本&gt;
+ 
+# 更新 WSL2 内核到最新版本
+wsl --update
+ 
+# 还原到 WSL2 内核的先前版本
+wsl --update --rollback
+ 
+# 更改指定分发的版本
+wsl --set-version &lt;Linux分发版名称&gt; &lt;版本&gt;</code></pre>
+
+
+
+<h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><p>查看系统并启动默认系统</p>
+<p><img src="https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305231208968.png" alt="image-20230523003712798" loading="lazy"></p>
+<p>更换Ubuntu官方源为国内源，加快下载速度</p>
+<pre class="language-none"><code class="language-none">vim &#x2F;etc&#x2F;apt&#x2F;sources.list</code></pre>
+
+<p>替换为：</p>
+<pre class="language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal main restricted
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-updates main restricted
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal universe
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-updates universe
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal multiverse
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-updates multiverse
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-backports main restricted universe multiverse
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-security main restricted
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-security universe
+deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-security multiverse</code></pre>
+
+<p>接下来添加Docker源，依次执行：</p>
+<pre class="language-none"><code class="language-none">curl -fsSL https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   &quot;deb [arch&#x3D;amd64] https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+
+sudo apt update</code></pre>
+
+<p>完成</p>
+<h1 id="Docker-Desktop-for-Windows"><a href="#Docker-Desktop-for-Windows" class="headerlink" title="Docker Desktop for Windows"></a>Docker Desktop for Windows</h1><p>Docker Desktop windows版已经能够支持WSL作为Docker Engine运行</p>
+<ol>
+<li>浏览器打开<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://www.docker.com/products/docker-desktop">https://www.docker.com/products/docker-desktop</a><br> 点击Download for Windows (stable)，下载Docker安装程序。</li>
+<li>确保WSL内的Docker已经卸载，如果没有卸载，可以执行：</li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> remove docker-ce
+<span class="token function">sudo</span> <span class="token function">apt</span> remove docker-ce-cli</code></pre>
+
+<ol start="3">
+<li>双击下载的安装程序安装，记住选择使用WSL作为Docker引擎。</li>
+<li>在Windows注销当前用户重新登录。到此Docker Desktop for Windows安装完毕。</li>
+</ol>
+<p>注意：如果发现在WSL下无法执行docker命令，可以通过如下操作打开：<br>进入Docker Desktop的settings，如下所示：</p>
+</div></section><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>8963</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="http://example.com/2023/05/18/%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7/WSL/" title="WSL">http://example.com/2023/05/18/%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7/WSL/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><span class="icon iconify" data-icon="ri:creative-commons-line"></span><span class="icon iconify" data-icon="ri:creative-commons-by-line"></span><span class="icon iconify" data-icon="ri:creative-commons-nc-line"></span><span class="icon iconify" data-icon="ri:creative-commons-sa-line"></span></a> 许可协议。</li></ul></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2023/05/18/%E5%BC%80%E5%8F%91/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%88%87%E7%89%87%E4%B8%8A%E4%BC%A0/" rel="prev" title="大文件切片上传"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">大文件切片上传</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2023/01/31/%E5%90%8E%E7%AB%AF/PHP/Laravel%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/" rel="next" title="Laravel模块开发"><span class="post-nav-text">Laravel模块开发</span><span class="icon iconify" data-icon="ri:arrow-right-s-line"></span></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2023 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 8963</span></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><a class="popup-trigger hty-icon-button icon-search" id="search" href="javascript:;" title="搜索"><span class="site-state-item-icon"><span class="icon iconify" data-icon="ri:search-line"></span></span></a><script>window.addEventListener("DOMContentLoaded", () => {
+  // Handle and trigger popup window
+  document.querySelector(".popup-trigger").addEventListener("click", () => {
+    document.querySelector(".popup").classList.add("show");
+    setTimeout(() => {
+      document.querySelector(".search-input").focus();
+    }, 100);
+  });
+
+  // Monitor main search box
+  const onPopupClose = () => {
+    document.querySelector(".popup").classList.remove("show");
+  };
+
+  document.querySelector(".popup-btn-close").addEventListener("click", () => {
+    onPopupClose();
+  });
+
+  window.addEventListener("keyup", event => {
+    if (event.key === "Escape") {
+      onPopupClose();
+    }
+  });
+});
+</script><script src="https://fastly.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script><script src="/js/search/local-search.js" defer type="module"></script><div class="popup search-popup"><div class="search-header"><span class="popup-btn-close close-icon hty-icon-button"><span class="icon iconify" data-icon="ri:close-line"></span></span></div><div class="search-input-container"><input class="search-input" id="local-search-input" type="text" placeholder="搜索..." value=""></div><div class="search-result-container"></div></div><script src="https://fastly.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script><script>const images = [...document.querySelectorAll('.markdown-body img')]
+mediumZoom(images)</script><style>.medium-zoom-image {
+  z-index: 99;
+}</style></body></html>
