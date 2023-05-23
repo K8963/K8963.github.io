@@ -15,7 +15,7 @@ hexo generate 或 hexo g
 启动服务器
 
 ```
-hexo server` 
+hexo server
 ```
 
 启动服务器，ctrl+c 结束，默认地址为：`http://localhost:4000/
