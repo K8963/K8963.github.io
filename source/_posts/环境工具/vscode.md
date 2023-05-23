@@ -5,8 +5,9 @@ comments:false
 author:8963
 tags:
   - vscode
+  - 编辑器
 categories:
-  - 其他
+  - 环境工具
 ---
 
 vscode 插件配置

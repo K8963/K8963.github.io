@@ -7,7 +7,7 @@ tags:
   - 开发工具
   - git
 categories:
-  - 其他
+  - 环境工具
 ---
 
 git的基本使用

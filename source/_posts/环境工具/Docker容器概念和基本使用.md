@@ -1,5 +1,5 @@
 ---
-title:Docker容器的使用
+title:Docker容器概念和基本使用
 date:2021-11-18 23:10:00
 comments:false
 author:8963
@@ -7,12 +7,29 @@ tags:
   - Docker
   - 开发环境
 categories:
-  - 其他
+  - 环境工具
 ---
 
-Docker容器的基本使用
+Docker容器概念和基本使用
 
 <!-- more -->
+
+# 概念
+
+容器之间公用的是主机的内核，但是容器不会直接访问内核，而是通过docker引擎进行访问
+
+![image-20230522235236616](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305231208735.png)
+
+例子:
+
+Dockerfile：菜谱
+build：制作料理包
+image：根据菜谱制作的料理包
+run：加热料理包并发货
+
+![image-20230523000616435](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305231208577.png)
+
+
 
 # 初始
 
@@ -346,6 +363,12 @@ docker rmi 镜像ID
 ```
 
 
+
+## 删除tag
+
+```
+docker rmi tag名
+```
 
 
 

@@ -6,8 +6,7 @@ author:8963
 tags:
   - Linux
 categories:
-  - 其他
-
+  - 环境工具
 ---
 
 CentOS
@@ -153,7 +152,9 @@ vi sshd_config
 
 开启使用用户名密码来作为连接验证
 
-![image-20220929155054461](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202211141027467.png)
+![image-20220929155054461](https://cdn.jsdelivr.net/gh/K8963/Imageshack@main/blog/202305231210107.png)
+
+
 
 保存文件，退出。
 
