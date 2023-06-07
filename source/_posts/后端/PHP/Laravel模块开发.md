@@ -528,6 +528,56 @@ class CreateAuthsTable extends Migration
 php artisan module:migrate Admin
 ```
 
+## 数据填充
+
+填充文件
+
+```php
+class AuthsTableSeederTableSeeder extends Seeder
+{
+    public function run(){
+        $image_id1 = DB::table('auth_images')->insertGetId([
+            'url' => '/upload/images/common/logo.png',
+            'open' => 1,
+            'status'=>1,
+            'created_at'=>date('Y-m-d H:i:s')
+        ]);
+        DB::table('auth_configs')->insert([
+            'name' => '名医工作站管理系统',
+            'image_status' => 1,
+            'logo_id' => $image_id1,
+            'about_us' => '1',
+            'created_at'=>date('Y-m-d H:i:s')
+        ]);
+        $group_id = DB::table('auth_groups')->insertGetId([
+            'name' => '工作站1',
+            'image_id'=>1,
+            'content'=>'介绍',
+            'created_at'=>date('Y-m-d H:i:s')]);
+        DB::table('auth_admins')->insert([
+            'username' => 'admin',
+            'password' => bcrypt('123456'),
+            'group_id' => 0,
+            'created_at'=>date('Y-m-d H:i:s')
+        ]);
+        DB::table('auth_admins')->insert([
+            'username' => 'gzz1',
+            'password' => bcrypt('123456'),
+            'group_id' => $group_id,
+            'created_at'=>date('Y-m-d H:i:s')
+        ]);
+
+
+    }
+}
+```
+
+执行数据填充
+
+```
+php artisan module:seed Admin
+```
+
 
 
 ## 登录

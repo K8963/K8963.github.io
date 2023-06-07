@@ -13,6 +13,8 @@ categories:
 Laravel-数据表迁移与填充
 <!-- more -->
 
+# 创建文件
+
 创建模型与填充文件：
 
 例如：创建一个文章数据表
@@ -71,6 +73,8 @@ class CreateArticlesTable extends Migration
 
 列类型可[查看](https://blog.csdn.net/weixin_36934930/article/details/100693183)
 
+# 迁移文件
+
 执行迁移文件
 
 ```php
@@ -110,6 +114,8 @@ class Article extends Model
     'updated_at'];
 }
 ```
+
+# 填充器
 
 创建填充器，生成随机测试数据
 
